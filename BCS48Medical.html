@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+html, body {
+    width: 80vw; 
+    margin:auto; 
+    overflow-x:hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 3vw;
+}
+
+#exam-details {
+    width: fit-content;
+    margin: 5vw auto; 
+}
+
+
+.tag-container{
+    width:fit-content;
+  margin: 5vw auto; 
+  
+}
+
+.flex-container{
+    
+}
+
+.tag-container p{
+  margin: 3vw;
+  right: 0vw;
+}
+
+.label {
+    display : inline-block;
+    width : 32vw;
+    text-align: right;
+    margin: 0 5vw;
+}
+.tag-container select{
+    margin: auto; 
+  font-size: 3vw;
+}
+
+
+
+.question-card{
+  margin: 2vw;
+  border: 2px solid #ccc;
+  border-radius: 2vw;
+}
+
+.question {
+  padding: 1vw;
+  border-radius: 2vw 2vw 0 0;
+}
+
+.options{
+    margin-top: 2vw;
+}
+
+.options p, .options label{
+  display : inline;
+}
+
+.correct {
+  background-color: #d4edda;
+}
+
+.incorrect {
+  background-color: #f8d7da;
+}
+
+.answer-label.correct-answer {
+  font-weight: bold;
+  color: green;
+}
+
+.answer-label.wrong-answer {
+  color: red;
+}
+
+.result {
+  font-weight: bold;
+  margin-top: 3vw;
+  margin-left: 2vw;
+}
+
+.explanation-container button {
+    width:100%;
+    height: 7vw;
+  padding: 1vw;
+    font-size: 3vw;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+    border-radius: 2vw;
+  cursor: pointer;
+}
+
+.explanation-container {
+    background-color: #fff;
+    margin: 1vw;
+  /*
+  border: 1px solid #aaa;
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #f1f1f1;
+  border-left: 4px solid #aaa;
+  border-radius: 4px;*/
+}
+
+.explanation-text {
+  display: none;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10vw;
+  margin: auto;
+  margin-top: 10vw;
+}
+
+.category-btn {
+    width: 60vw;
+  padding: 12vw 24vw;
+  font-size: 3vw;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4vw;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+input[type="radio"] {
+    width: 2vw;
+    height: 2vw;
+}
+
+
+.category-btn:hover {
+  background-color: #2980b9;
+}
+
+
+.home-btn-container {
+    width: min-content;
+  margin: 0 auto;
+}
+
+
+.filter-btn{
+    display : block;
+    width: fit-content;
+}
+
+
+
+
+.home-btn:hover {
+  background-color: #27ae60;
+}
+
+
+#home-top,
+#home-bottom {
+  display: none;
+   
+}
+
+#quiz-controls {
+  display: none;
+  text-align: center;
+}
+
+#quiz-controls button,  .home-btn, .filter-btn {
+    margin: 3vw auto;
+    padding: 1vw 2vw;
+    font-size: 3vw;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+    border-radius: 2vw;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#submit-button, retry-button{
+  display: none;
+}
+
+
+.lock-section {
+  text-align: right;
+  margin-top: 1vw;
+}
+
+.lock-icon {
+  cursor: pointer;
+  font-size: 2vw;
+  user-select: none;
+  color: #555;
+}
+
+.locked .lock-icon {
+  color: #2ecc71;
+}
+
+figure, img{
+    width: 100%;
+    margin: 0;
+}
+
+.explanation {
+  margin-top: 2vw;
+  padding: 2vw;
+  background: #f0f8ff;
+  border-left: 2vw solid #3498db;
+}
+
+.question p{
+    display: inline;
+}
+
+
+</style>
+</head>
+<body>
+  
+<div id="exam-details">
+    
+</div>
+  
+  
+
+
+
+<!--div id="home-top" class="home-btn-container">
+  <-button onclick="goHome()" class="home-btn">Home</button->
+  <button type="button" class="home-btn" onclick="submitAll()">Learn with Solutions</button>
+  
+</div-->
+
+<div id="output"></div>
+
+
+
+<form id="quiz-form"></form>
+
+
+
+
+<div id="result" class="result"></div>
+
+  <div id="quiz-controls" class="quiz-controls">
+  <button id="submit-button" type="button" onclick="submitQuiz()">Submit</button>
+  <button id="retry-button" type="button" onclick="retryIncorrect()">Retry Incorrect</button>
+</div>
+
+<button onclick="filterMcqs()" class="filter-btn">Restart Test</button>
+
+<div id="home-bottom" class="home-btn-container">
+  <button onclick="goHome()" class="home-btn">Home</button>
+</div>
+
+
+
+<script>
+currentCategoryName = "48th BCS Preliminary Test";
+currentExamName = "Special (Medical Science) (18-07-2025)";
+currentSubjectNames = "All Subjects";
+
+mcqs = [
+    {
+        "question": "<p>The passive form of the sentence, \"Who did the work?\" is -</p>",
+        "options": ["By whom the work was done?", "Whom had the work done by?", "By whom was the work done?", "Who was the work done?"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Lord of the Flies was written by —</p>",
+        "options": ["William Shakespeare", "William Wordsworth", "William Golding", "T.S. Eliot"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>প্রথম বিশ্বযুদ্ধের সমাপ্তিতে কোন চুক্তি স্বাক্ষরিত হয়?</p>",
+        "options": ["সেভার্স চুক্তি", "লুজেন (Lausanne) চুক্তি", "ভার্সাই চুক্তি", "প্যারিস চুক্তি"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>x - 2y - 10 = 0 এবং 2x+y-3= 0 রেখাদ্বয়ের ঢালদ্বয়ের গুণফল</p>",
+        "options": ["-2", "2", "-3", "-1"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'অন্তর্ভুক্তিমূলক' শব্দ উচ্চারণে কয়টি অক্ষর পাওয়া যায়?</p>",
+        "options": ["৫", "৬", "৭", "৮"],
+        "answer": 1,
+        "explanation": "<div class='explanation'><p>অন্ + তর্‌+ভুক্‌+তি+মূ+লক্ = অন্তর্ভুক্তিমূলক।</p></div>"
+    },
+    {
+        "question": "<p>He as well as his parents ______ spending vacation abroad.</p>",
+        "options": ["are", "is", "will", "can"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>What does the idiom \"take someone to task\" mean?</p>",
+        "options": ["To give someone a task to do", "To praise someone for his task", "To rebuke someone", "To appoint someone"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>যদি log<sub>10</sub>x = -3 হয়, তবে এর মান কত?</p>",
+        "options": ["0.1", "0.01", "0.001", "0.0001"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কমনওয়েলথ কোন ধরনের দেশ নিয়ে গঠিত?</p>",
+        "options": ["ইংরেজ শাসন থেকে স্বাধীনতাপ্রাপ্ত দেশসমূহ", "তেল উৎপাদনকারী দেশসমূহ", "এশিয়া ও ইউরোপের দেশসমূহ", "স্বল্প উন্নত দেশসমূহ"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>একটি চৌবাচ্চার দৈর্ঘ্য, প্রস্থ ও উচ্চতা যথাক্রমে ৩ মিটার, ৪ মিটার ও ৫ মিটার হলে, এতে কত লিটার বিশুদ্ধ পানি ধরবে?</p>",
+        "options": ["৬০০০০০", "৬০০০০", "৬০০০", "৬০০"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশে কখন প্রথম প্রেসিডেন্ট পদ্ধতির সরকার গঠিত হয়?</p>",
+        "options": ["১৯৭১", "১৯৭২", "১৯৭৫", "১৯৮০"],
+        "answer": 0,
+        "explanation": "<div class='explanation'>উত্তরটি সঠিক কেননা বাংলাদেশের ইতিহাসে ১৯৭১ সালে স্বাধীনতা লাভের পর প্রথম প্রেসিডেন্ট পদ্ধতির সরকার গঠন করা হয়। এই সময় বাংলাদেশে বঙ্গবন্ধু শেখ মুজিবুর রহমান প্রথম প্রেসিডেন্ট হিসেবে শাসন শুরু করেন। ১৯৭১ সালের ১৬ ডিসেম্বর বাংলাদেশ স্বাধীনতা অর্জন করে এবং এর ফলে রাজনৈতিক কাঠামোতে একটি নতুন দিগন্তের সূচনা হয়।\n                                                                                                                                                    <p class=\"text-muted fs-7 mt-2 mb-0\">AI-এর উত্তরে ভুল\n                                                                                থাকতে পারে।</p></div>"
+    },
+    {
+        "question": "<p>কোন ইউরোপীয় ভারতে আসার জলপথ আবিষ্কার করেন?</p>",
+        "options": ["ফ্রান্সিস ড্রেক", "ফার্ডিনান্ড ম্যাগেলান", "ভাস্কো-ডা-গামা", "ক্রিস্টোফার কলম্বাস"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বর্তমান অন্তবর্তীকালীন সরকার কখন গঠিত হয়?</p>",
+        "options": ["০৮ আগস্ট ২০২৪", "১০ আগস্ট ২০২৪", "১২ আগস্ট ২০২৪", "০৫ আগস্ট ২০২৪"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>একটি দেশের মোট আয়তনের কত শতাংশ বনভূমি থাকা প্রয়োজন?</p>",
+        "options": ["১৫-২০%", "২০-২৫%", "৩০-৩৫%", "৩৫-৪০%"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Choose the correct spelling.</p>",
+        "options": ["Repeatition", "Repeatation", "Repetition", "Ripitetion"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বিশ্বস্বাস্থ্য সংস্থা কত সালে বাংলাদেশকে পোলিও মুক্ত ঘোষণা করে?</p>",
+        "options": ["১৯৯৮", "২০০৪", "২০১৪", "২০১৯"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p><math><msqrt><mfrac><mn>9</mn><mn>4</mn></mfrac></msqrt></math> সংখ্যাটি</p>",
+        "options": ["স্বাভাবিক সংখ্যা", "মূলদ সংখ্যা", "অমূলদ সংখ্যা", "জটিল সংখ্যা"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>ইসরায়েল ও ইরানের মধ্যে চলমান সংঘাতের কারণ কোনটি?</p>",
+        "options": ["বাণিজ্যিক", "পারমানবিক শক্তি", "অর্থনৈতিক", "কোনটিই নয়"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'ইউসুফ-জোলেখা'র কবি শাহ মুহম্মদ সগীরের জন্ম কোথায়?</p>",
+        "options": ["বগুড়া", "সিলেট", "নদীয়া", "চট্টগ্রাম"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Transparency শব্দের বাংলা পরিভাষা কী?</p>",
+        "options": ["যথার্থতা", "নির্ভরযোগ্যতা", "স্বচ্ছতা", "দুর্নীতিদমন"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>k এর মান কত হলে kx<sup>2</sup> + 3x + 4 রাশিটি পূর্ণবর্গ হবে?</p>",
+        "options": ["<math><mo>-</mo><mfrac><mn>16</mn><mn>9</mn></mfrac></math>", "<math><mo>-</mo><mfrac><mn>9</mn><mn>16</mn></mfrac></math>", "<math><mfrac><mn>9</mn><mn>16</mn></mfrac></math>", "<math><mfrac><mn>16</mn><mn>9</mn></mfrac></math>"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>______ others is a great deed.</p>",
+        "options": ["To help", "Help", "To helping", "To have helped"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The synonym of the word 'spectacular' is -</p>",
+        "options": ["ugly", "spacious", "spatial", "breathtaking"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বর্তমান বিশ্বের কতটি দেশ জাতিসংঘের সদস্য?</p>",
+        "options": ["১৮৩", "১৮৮", "১৯৩", "১৯৭"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>These books ______ me.</p>",
+        "options": ["belongs to", "belong to", "are belonged by", "belongs by"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'যে আলোতে কুমুদ ফোটে'- এককথায় কী হবে?</p>",
+        "options": ["কুমুদিন", "কৌমুদী", "প্রভাবতী", "বিভা"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>জাতিসংঘ কবে আনুষ্ঠানিকভাবে আত্মপ্রকাশ করে?</p>",
+        "options": ["২৪ অক্টোবর, ১৯৪৫", "২৮ নভেম্বর, ১৯৪৩", "২৮ জানুয়ারি, ১৯৪৩", "২৪ ডিসেম্বর, ১৯৪৫"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>নিচের কোনটি বাংলাদেশের শিল্প সংক্রান্ত অর্থনৈতিক কর্মকান্ড নয়?</p>",
+        "options": ["মাছ চাষ", "বস্ত্র", "পাট", "সিমেন্ট"],
+        "answer": 0,
+        "explanation": "<div class='explanation'>মাছ চাষ একটি কৃষি সংক্রান্ত কার্যক্রম, যা প্রধানত খাদ্য উৎপাদনের সাথে সম্পর্কিত। অন্যদিকে, বস্ত্র, পাট এবং সিমেন্ট হল শিল্প সংক্রান্ত অর্থনৈতিক কর্মকান্ড, যেগুলি বিভিন্ন দ্রব্যের উৎপাদনের জন্য শিল্প প্রক্রিয়ার সাথে যুক্ত। তাই মাছ চাষ বাংলাদেশের শিল্প সংক্রান্ত অর্থনৈতিক কর্মকান্ড নয়, কারণ এটি একটি কৃষিক্ষেত্রের কার্যক্রম।\n                                                                                                                                                    <p class=\"text-muted fs-7 mt-2 mb-0\">AI-এর উত্তরে ভুল\n                                                                                থাকতে পারে।</p></div>"
+    },
+    {
+        "question": "<p>মুক্তিযুদ্ধ চলাকালীন সময়ে প্রবাসী গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের অস্থায়ী সচিবালয় (সদর দপ্তর) কোথায় ছিল?</p>",
+        "options": ["মুজিবনগর", "থিয়েটার রোড, কলকাতা", "কমিরগঞ্জ", "বেনাপোল"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাক্যের অন্তর্গত শব্দের পারস্পরিক সম্পর্ক ব্যাকরণের কোন অংশে আলোচিত হয়?</p>",
+        "options": ["সন্ধি", "পদ", "কাল", "কারক"],
+        "answer": 1,
+        "explanation": "<div class='explanation'>পদ (Parts of Speech) বিষয়টি ব্যাকরণের একটি গুরুত্বপূর্ণ অংশ, যা বাক্যের অন্তর্গত শব্দের পারস্পরিক সম্পর্ক বুঝতে সাহায্য করে। শব্দগুলো কিভাবে মিলিত হয়ে বাক্য গঠন করে, তা পদ-এর মাধ্যমে ক্লিয়ার হয়। প্রতিটি শব্দের নির্দিষ্ট ভূমিকা আছে, যেমন ক্রিয়া, বিশেষণ, বিশেষ্য ইত্যাদি, এবং এগুলো একত্রে কাজ করে বাক্যের অর্থ প্রকাশ করে। তাই, এখানে \"পদ\" উত্তরটি সঠিক।\n                                                                                                                                                    <p class=\"text-muted fs-7 mt-2 mb-0\">AI-এর উত্তরে ভুল\n                                                                                থাকতে পারে।</p></div>"
+    },
+    {
+        "question": "<p>|3x - 4| <math><mo>≤</mo></math> 2 এর সমাধান</p>",
+        "options": ["<math><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>2</mn></math>", "<math><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mn>2</mn></math>", "<math><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>&lt;</mo><mi>x</mi><mo>≤</mo><mn>2</mn></math>", "<math><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mn>2</mn></math>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>নিচের কোন প্রতিষ্ঠান বাংলাদেশের ২১শে ফেব্রুয়ারির শহিদ দিবসকে 'আন্তর্জাতিক মাতৃভাষা দিবস' হিসেবে স্বীকৃতি প্রদান করে?</p>",
+        "options": ["ইউনিসেফ", "ইউনেসকো", "ইউএন", "এডিবি"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>যদি x : y = 4 : 3, y : z = 5 : 4 এবং x = 200 হয়, তবে z এর মান কত?</p>",
+        "options": ["<math><mfrac><mn>100</mn><mn>3</mn></mfrac></math>", "<math><mfrac><mn>800</mn><mn>3</mn></mfrac></math>", "150", "120"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>ইসমাইল হোসেন সিরাজীর কোন কাব্যটি বাজেয়াপ্ত হয়?</p>",
+        "options": ["'অনল প্রবাহ'", "'আকাঙ্ক্ষা'", "'উদ্বোধন'", "'নব উদ্দীপনা'"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>অনুভূতিজাত দ্বিরুক্ত শব্দ কোনটি?</p>",
+        "options": ["ছমছম", "ঝমঝম", "টিকটিক", "ঠিক ঠিক"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>নিচের চিত্রে BC এর মান কত?</p><figure class=\"image\"><img style=\"aspect-ratio:450/113;\" src=\"https://sattacademy.com/uploads/ckeditor/1752833154.png\" width=\"450\" height=\"113\"></figure>",
+        "options": ["<p>9 মিটার</p>", "<p>6 মিটার</p>", "<p>4 মিটার</p>", "<p>3 মিটার</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশের সংসদীয় সরকার ব্যবস্থায় নিয়মতান্ত্রিক প্রধান কে?</p>",
+        "options": ["প্রধানমন্ত্রী", "রাষ্ট্রপতি", "স্পিকার", "সংসদ সচিব"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Choose the correct sentence.</p>",
+        "options": ["He resembles like his father.", "He resembles with his father.", "He resembles his father.", "He resembles similar to his father."],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>অক্টোবর সমাজতান্ত্রিক বিপ্লব কত খ্রিস্টাব্দে সংঘটিত হয়?</p>",
+        "options": ["১৯১৭", "১৮৫৭", "১৮৪৯", "১৭৫৭"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>শুদ্ধ বাক্য কোনটি?</p>",
+        "options": ["সারা দেশব্যাপী দিবসটি উদ্‌যাপন করা হবে।", "সারা দেশে দিবসটি উদ্যাপন করা হবে।", "দেশব্যাপী দিবসটি উদ্যাপন করা হবে।", "সারা দেশে দিবসটি উদ্‌যাপন করা হবে।"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>একটি গাছের পাদদেশ হতে <math><mn>26</mn><msqrt><mn>3</mn></msqrt></math> মিটার দূরে একটি স্থানে গাছটির শীর্ষের উন্নতি কোণ 30<math><mo>°</mo></math> হলে, গাছটির উচ্চতা কত মিটার?</p>",
+        "options": ["<math><mfrac><msqrt><mn>3</mn></msqrt><mn>26</mn></mfrac></math>", "<math><mfrac><mn>26</mn><msqrt><mn>3</mn></msqrt></mfrac></math>", "26", "78"],
+        "answer": 2,
+        "explanation": "<div class='explanation'>To find the height of the tree using the angle of elevation and the distance from the base of the tree, we can use basic trigonometry. The situation forms a right triangle where:\n\n- The distance from the base of the tree to the point of measurement is the adjacent side (263 meters).\n- The height of the tree is the opposite side.\n- The angle of elevation (30 degrees) relates these two sides through the tangent function.\n\nThe tangent of an angle in a right triangle is defined as the ratio of the opposite side to the adjacent side:\n\ntan(θ) = opposite / adjacent\n\nFor this case:\n\ntan(30°) = height / 263\n\nKnowing that tan(30°) equals 1/√3, we can rearrange the equation to solve for the height:\n\nheight = 263 * tan(30°) = 263 * (1/√3)\n\nCalculating this gives us a height approximately equal to 26 meters. Thus, option c (26) is the correct answer as it represents the height of the tree.\n                                                                                                                                                    <p class=\"text-muted fs-7 mt-2 mb-0\">AI-এর উত্তরে ভুল\n                                                                                থাকতে পারে।</p></div>"
+    },
+    {
+        "question": "<p>log2 + log4 + log8 + …. ধারাটির অষ্টম পদ কোনটি?</p>",
+        "options": ["<p>log256</p>", "<p>log128</p>", "<p>log64</p>", "<p>log32</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোন ঘটনার কারণে ধরিত্রী দিবসের সূচনা হয়?</p>",
+        "options": ["ব্যাপক বায়ু দূষণ", "জলবায়ু পরিবর্তন", "ব্যাপক তেল নিঃসরণ", "পারমানবিক বিস্ফোরণ"],
+        "answer": 1,
+        "explanation": "<div class='explanation'><p>বিশ্ব ধরিত্রী দিবস ২২ এপ্রিল। ১৯৬৯ সালে পরিবেশ প্রকৃতির প্রতি মানুষের বিশেষ সচেতনতা, পরিবেশদূষণ রোধ এবং প্রকৃতি ধ্বংসের বিরুদ্ধে বিশ্বের প্রায় ২০ লাখ মানুষের সক্রিয় আন্দোলনের ফলে ১৯৭০ সালে এ দিবসের সূচনা হয়। ধরিত্রী দিবসের সূচনার মূল কারণ হলো জলবায়ু পরিবর্তন।</p></div>"
+    },
+    {
+        "question": "<p>যদি P = 16 এবং TAP = 37 হয় তবে CUP = কত?</p>",
+        "options": ["40", "38", "36", "39"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশের সংবিধানের নাম কি?</p>",
+        "options": ["বাংলাদেশের সংবিধান", "বাংলাদেশের সাংবিধানিক বিধিমালা", "গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান", "প্রজাতন্ত্র বাংলাদেশ সংবিধান"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোনটি অশুদ্ধ বানান?</p>",
+        "options": ["Pneumonia", "Dyspepsia", "Gastitris", "Diarrhoea"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'আজ চারদিক হতে ধনিক বণিক শোষণকারীর জাত, ও ভাই জোঁকের মতম শুষছে রক্ত, কাড়ছে খালার ভাত।' কার লেখা?</p>",
+        "options": ["রবীন্দ্রনাথ ঠাকুর", "কাজী নজরুল ইসলাম", "গোলাম মোস্তফা", "সত্যেন্দ্রনাথ দত্ত"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'আফতাব' শব্দের সমার্থক শব্দ কোনটি?</p>",
+        "options": ["অর্ণব", "রাতুল", "অর্ক", "জলধি"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>চীনের 'ওয়ান বেল্ট ওয়ান রোড' প্রকল্প কোন দেশসমূহের মধ্যে সংযোগ বৃদ্ধি করবে?</p>",
+        "options": ["এশিয়া, ইউরোপ, আমেরিকা", "এশিয়া, আফ্রিকা, আরব", "এশিয়া, অস্ট্রেলিয়া, আফ্রিকা", "এশিয়া, ইউরোপ, আফ্রিকা"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>What type of sentence is 'Do or die.'</p>",
+        "options": ["Complex", "Simple", "Compound", "Exclamatory"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'টঙ্ক (Tonk) আন্দোলন' কি?</p>",
+        "options": ["<p>সাঁওতাল বিদ্রোহ</p>", "<p>কৃষক আন্দোলন</p>", "<p>প্রাকৃতিক সম্পদ রক্ষার আন্দোলন</p>", "<p>কোনটিই নয়</p>"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>She works <u>hard</u>. What part of speech is the underlined word?</p>",
+        "options": ["Adjective", "Adverb", "Verb", "Noun"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>নিচের চিত্রে মোট কয়টি ত্রিভুজ আছে?</p><figure class=\"image\"><img style=\"aspect-ratio:154/125;\" src=\"https://sattacademy.com/uploads/ckeditor/1752829485.jpeg\" width=\"154\" height=\"125\"></figure>",
+        "options": ["<p>৪টি</p>", "<p>৫টি</p>", "<p>৬টি</p>", "<p>৭টি</p>"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>John Keats wrote _____</p>",
+        "options": ["Ode to the West Wind", "Ode on a Grecian urn", "Tintern Abbey", "The Ancient Mariner"],
+        "answer": 1,
+        "explanation": "<div class='explanation'><p>John Keats ছিলেন একজন ইংরেজ রোমান্টিক কবি, যিনি তার সুন্দর ভাষা ও গভীর কল্পনার জন্য বিখ্যাত। তিনি অনেক 'ode' বা স্তবকবদ্ধ কবিতা লিখেছেন, যার মধ্যে \"Ode on a Grecian Urn\" অন্যতম শ্রেষ্ঠ। John Keats-এর বিখ্যাত কবিতাগুলো- Ode to a Nightingale, Ode on Melancholy, To Autumn ইত্যাদি।</p><p>Ode to the West Wind রচনা করেছেন P. B. Shelley.</p><p>Tintern Abbey লিখেছেন William Wordsworth.</p><p>The Rime of the Ancient Mariner এটি Samuel Taylor Coleridge এর বিখ্যাত কাব্য।</p></div>"
+    },
+    {
+        "question": "<p>কোন রাষ্ট্রের আইনসভা দ্বি-কক্ষ বিশিষ্ট?</p>",
+        "options": ["যুক্তরাষ্ট্র", "ভারত", "যুক্তরাজ্য", "উপরের সবগুলো"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশ ১৯৭৪ সালে জাতিসংঘের কততম সদস্য রাষ্ট্র হিসেবে অন্তর্ভুক্ত হয়?</p>",
+        "options": ["১২৬তম", "১৩০তম", "১৩৬তম", "১৩৯তম"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোন শব্দে দ্বিস্বরধ্বনি রয়েছে?</p>",
+        "options": ["তিসি", "মালি", "লাউ", "মেয়ে"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p><strong>দ্বিস্বর ধ্বনি: </strong>পাশাপাশি দুটি স্বরধ্বনি থাকলে দ্রুত উচ্চারণের সময় তা একটি সংযুক্ত স্বরধ্বনি রূপে উচ্চারিত হয়। এই রূপে একসঙ্গে উচ্চারিত দুটি মিলিত স্বরধ্বনিকে বলা হয় যৌগিক স্বরধ্বনি। যৌগিক স্বরধ্বনির অপর নাম দ্বিস্বর/যুগ্মস্বর/যৌগিক স্বর/সন্ধিস্বর/সান্ধ্যক্ষর। বাংলা বর্ণমালায় যৌগিক স্বরধ্বনির সংখ্যা ২৫টি। যথা: আ + উ = আউ উদাহরণ: লাউ, জাউ।</p></div>"
+    },
+    {
+        "question": "<p>মার্কিন যুক্তরাষ্ট্রের আইনসভার নাম কি?</p>",
+        "options": ["পার্লামেন্ট", "কংগ্রেস", "সিনেট", "কোনটিই নয়"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>I love reading books and ____ football.</p>",
+        "options": ["to play", "play", "playing", "to have played"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>She succeeded ______ her good work.</p>",
+        "options": ["because", "since", "because of", "as"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>Because of একটি preposition, যার পরে noun/noun phrase বসে। এখানে 'her good work' একটি noun phrase তাই 'because of' সঠিক। যেমন: He failed because of his carelessness.</p><p>Because, since, as এগুলো conjunction, অর্থাৎ এগুলোর পরে subject + verb থাকে। যেমন: She succeeded because she worked hard.</p></div>"
+    },
+    {
+        "question": "<p>'সাফটা' (SAFTA) চুক্তি কত সালে সম্পাদিত হয়?</p>",
+        "options": ["১৯৯৮", "২০০২", "২০০৪", "২০০৯"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>ক্রিয়াপদের মূল অংশকে কী বলে?</p>",
+        "options": ["কর্ম", "ধাতু", "প্রত্যয়", "বিভক্তি"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p><math><mi>x</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mfrac><mn>1</mn><mi>x</mi></mfrac><mo>&nbsp;</mo><mo>=</mo><mo>&nbsp;</mo><mn>2</mn></math> হলে <math><msup><mi>x</mi><mn>4</mn></msup><mo>+</mo><mo>&nbsp;</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>4</mn></msup></mfrac></math> এর মান -</p>",
+        "options": ["1", "0", "2", "<math><mfrac><mn>1</mn><mn>2</mn></mfrac></math>"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>দেওয়া আছে,</p><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mi>x</mi></mfrac><mo>=</mo><mn>2</mn></math></p><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mo>⇒</mo><msup><mfenced><mrow><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></mfenced><mn>2</mn></msup><mo>=</mo><msup><mn>2</mn><mn>2</mn></msup></math>&nbsp;[বর্গ করে]</p><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mo>⇒</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>.</mo><mi>x</mi><mo>.</mo><mfrac><mn>1</mn><mi>x</mi></mfrac><mo>+</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac><mo>=</mo><mn>4</mn></math></p><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mo>⇒</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac><mo>=</mo><mn>4</mn><mo>-</mo><mn>2</mn></math></p><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mo>⇒</mo><msup><mfenced><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac></mrow></mfenced><mn>2</mn></msup><mo>=</mo><msup><mn>2</mn><mn>2</mn></msup></math>[বর্গ করে]</p><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mo>⇒</mo><msup><mfenced><msup><mi>x</mi><mn>2</mn></msup></mfenced><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>.</mo><msup><mi>x</mi><mn>2</mn></msup><mo>.</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac><mo>+</mo><msup><mfenced><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac></mfenced><mn>2</mn></msup><mo>=</mo><mn>4</mn></math></p><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mo>⇒</mo><msup><mi>x</mi><mn>4</mn></msup><mo>+</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>4</mn></msup></mfrac><mo>=</mo><mn>4</mn><mo>-</mo><mn>2</mn></math></p><p>∴&nbsp;<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><msup><mi>x</mi><mn>4</mn></msup><mo>+</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>4</mn></msup></mfrac><mo>=</mo><mn>2</mn></math></p></div> <div class='explanation'>To solve the equation x + 1x = 2, we can simplify it to 2x = 2. By dividing both sides by 2, we find that x = 1. \n\nNow, we need to substitute x = 1 into the expression x^4 + 1x^4. This can be simplified as follows:\n\n1^4 + 1(1^4) = 1 + 1 = 2.\n\nThus, the value of the expression x^4 + 1x^4 when x = 1 is 2. This is why the answer is correct and indeed, the value of the expression is 2.\n                                                                                                                                                    <p class=\"text-muted fs-7 mt-2 mb-0\">AI-এর উত্তরে ভুল\n                                                                                থাকতে পারে।</p></div>"
+    },
+    {
+        "question": "<p>কোনটি উন্নয়ন কার্যক্রমে ঋণ সহয়তাদানকারী সংস্থা?</p>",
+        "options": ["ইউরোপীয় ইউনিয়ন", "এশীয় উন্নয়ন ব্যাংক", "বিশ্বব্যাংক", "উপরের সবগুলো"],
+        "answer": 3,
+        "explanation": "<div class='explanation'><p>উন্নয়ন কার্যক্রমে ঋণদানকারী বা ঋণ সহায়তাদানকারী সংস্থা হলো এমন প্রতিষ্ঠান যারা বিভিন্ন উন্নয়নমূলক কর্মকান্ডে অর্থায়ন করার জন্য ঋণ প্রদান করে। যেমন: বিশ্বব্যাংক, এশীয় উন্নয়ন ব্যাংক ও ইউরোপীয় ইউনিয়ন ইত্যাদি।</p></div>"
+    },
+    {
+        "question": "<p><math><mfrac><mn>1</mn><mrow><mi>x</mi><mo>-</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>2</mn><mrow><mi>x</mi><mo>-</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mrow><mi>x</mi><mo>-</mo><mn>3</mn></mrow></mfrac></math> এর সমাধান</p>",
+        "options": ["<math><mfrac><mn>3</mn><mn>2</mn></mfrac></math>", "<math><mfrac><mn>2</mn><mn>3</mn></mfrac></math>", "<math><mfrac><mn>5</mn><mn>2</mn></mfrac></math>", "<math><mfrac><mn>2</mn><mn>5</mn></mfrac></math>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'তিনি কথা বললেন না।'- বাক্যটির অস্তিবাচক রূপ কী হবে?</p>",
+        "options": ["তিনি কথা বলতে চাইলেন না ।", "তিনি কথা না বলে থাকতে পারলেন না।", "তিনি নীরব থাকতে চেষ্টা করলেন ।", "তিনি চুপ করে থাকলেন।"],
+        "answer": 3,
+        "explanation": "<div class='explanation'><p>'তিনি কথা বললেন না।' বাক্যটির অস্তিবাচক রূপ 'তিনি চুপ করে থাকলেন'।</p></div>"
+    },
+    {
+        "question": "<p>এশীয় দেশসমূহের মধ্যে কোনটি বিশ্বের উন্নত দেশ?</p>",
+        "options": ["চীন", "ভারত", "জাপান", "সিঙ্গাপুর"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>প্রত্যয়যোগে গঠিত শব্দ কোনটি?</p>",
+        "options": ["<p>ডাক্তারখানা</p>", "<p>অনুগমন</p>", "<p>দিলখোলা</p>", "<p>সম্রাট</p>"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><p>ডাক্তারখানা (ডাক্তার+খানা), অনুগমন (অনু+√গম্+অন) ও সম্রাট (সম+√রাজ+ক্বিপ) তিনটি শব্দই প্রত্যয়যোগে গঠিত। আবার, অনুগমন (অনু+গমন) সন্ধিযোগে ও উপসর্গযোগেও গঠিত হয়। সম্রাট (সম্+রাট) সন্ধিযোগেও গঠিত হয়।</p></div>"
+    },
+    {
+        "question": "<p>বাংলাদেশের সংবিধানের কত নং অনুচ্ছেদে চিন্তা, বিবেক ও বাকস্বাধীনতা নাগরিকের মৌলিক অধিকার হিসেবে স্বীকৃত?</p>",
+        "options": ["১৫", "২৭", "৩৭", "৩৯"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশ সরকারের আয়ের উৎস কোনটি?</p>",
+        "options": ["আবগারি শুল্ক", "মূল্য সংযোজন কর", "জরিমানা ও শাস্তিমূলক ফি", "উপরের সবগুলো"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>১৯৭১ সালে সর্বপ্রথম কোন পত্রিকা পাকিস্তানী বাহিনীর গণহত্যার উপর ব্রিটিশ সাংবাদিক সাইমন ড্রিং এর প্রতিবেদন প্রকাশ করে?</p>",
+        "options": ["নিউইয়র্ক টাইমস", "ডেইলি মেইল", "ডেইলি টেলিগ্রাফ", "দ্য ইনডিপেনডেন্ট"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Charles Dickens was an English ______</p>",
+        "options": ["poet", "playwright", "politician", "novelist"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলামতি কি?</p>",
+        "options": ["এক প্রকার ধান", "এক প্রকার গম", "এক প্রকার আম", "একটি নদীর নাম"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>ছড়ার ছন্দকে কী বলে?</p>",
+        "options": ["স্বরবৃত্ত", "মাত্রাবৃত্ত", "অক্ষরবৃত্ত", "গদ্যছন্দ"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Do you know the solution ______ the problem?</p>",
+        "options": ["of", "for", "about", "to"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশের সিভিল সার্ভিস (বিসিএস) পরীক্ষা সর্বপ্রথম কত সালে শুরু হয়েছিল?</p>",
+        "options": ["১৯৭৩", "১৯৭৪", "১৯৭৫", "১৯৭৬"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশের কর্ণফুলি নদীর উৎপত্তিস্থল কোথায়?</p>",
+        "options": ["লুসাই পাহাড়", "সিকিমের পাবর্ত্য অঞ্চল", "তিব্বতের মানোস সরোবর", "নাগা-মনিপুর অঞ্চলের বোরাক নদী"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><figure class=\"table\"><table><tbody><tr><td><p style=\"text-align:center;\"><strong>নদী/নদ</strong></p></td><td><p style=\"text-align:center;\"><strong>উৎপত্তি</strong></p></td><td><p style=\"text-align:center;\"><strong>সমাপ্তি</strong></p></td><td><p style=\"text-align:center;\"><strong>প্রবেশের স্থান</strong></p></td><td><p style=\"text-align:center;\"><strong>উপনদী</strong></p></td></tr><tr><td>কর্ণফুলী</td><td>মিজোরামের লুসাই থেকে পাহাড়</td><td>বঙ্গোপসাগর</td><td>রাঙ্গামাটি</td><td>কাসালং, হালদা এবং বোয়ালখাল, কাপ্তাই</td></tr></tbody></table></figure></div>"
+    },
+    {
+        "question": "<p>বাংলাদেশের প্রাচীনতম জনপদ কোনটি?</p>",
+        "options": ["মহাস্থানগড়", "পাহাড়পুর", "ময়নামতি", "উয়ারীবটেশ্বর"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>ফররুখ আহমদের 'সাত সাগরের মাঝি' কত সালে প্রকাশিত হয়?</p>",
+        "options": ["১৯০৫", "১৯৪০", "১৯৪৪", "১৯৫৫"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>ফররুখ আহমদের শ্রেষ্ঠ কাব্যগ্রন্থ 'সাত সাগরের মাঝি'। এটি ১৯৪৪ সালে প্রকাশিত হয়।</p></div>"
+    },
+    {
+        "question": "<p>১, ৪, ৯, ১৬, ২৫, _______ অনুক্রমটির পরবর্তী সংখ্যাটি কত?</p>",
+        "options": ["৬৬", "৪৯", "৩৬", "৩৪"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'শ্রীকৃষ্ণকীর্তন' কাব্যের প্রথম খন্ডের নাম কী?</p>",
+        "options": ["জন্মখণ্ড", "তাম্বুলখণ্ড", "দানখন্ড", "রাধাবিরহ"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>আন্তর্জাতিক ওজোন দিবস (International Day for the Prevention of the Ozone Layer) কত তারিখে পালিত হয়?</p>",
+        "options": ["২২ জুলাই", "২৮ জুলাই", "১৭ আগস্ট", "১৬ সেপ্টেম্বর"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Doctor Faustus is _____</p>",
+        "options": ["a comedy", "a tragedy", "a historical novel", "an absurd play"],
+        "answer": 1,
+        "explanation": "<div class='explanation'><p>Doctor Faustus (সম্পূর্ণ নাম The Tragical History of the Life and Death of Doctor Faustus) হলো একটি tragedy, যা ইংরেজ নাট্যকার Christopher Marlowe রচিত। এই নাটকে Faustus নামক এক জার্মান স্কলার শয়তানের সঙ্গে চুক্তি করে অতিপ্রাকৃত ক্ষমতা অর্জনের চেষ্টা করে, এবং শেষ পর্যন্ত নিজের আত্মা হারায়। তার অহংকার ও অতিমাত্রায় জ্ঞানলিপ্সার জন্য তার পতন ঘটে, যা একটি ট্র্যাজেডির মূল বৈশিষ্ট্য। Marlowe এর বিখ্যাত নাটকগুলো-Tamburlaine the Great, The Jew of Malta, Dido, Queen of Carthage, Massacre at Paris ইত্যাদি।</p></div>"
+    },
+    {
+        "question": "<p>কে প্রথম 'গ্লোবাল ভিলেজ' ধারাটির উপস্থাপন করেন?</p>",
+        "options": ["হার্বার্ট মার্শাল ম্যাকলুহান", "রবার্ট কিংসলে", "হেনরি জি. ম্যাকমিলান", "ডব্লিউ জি, পেরি"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><p>বিখ্যাত দার্শনিক হার্বার্ট মার্শাল ম্যাকলুহান গ্লোবাল ভিলেজ ধারণাটির উদ্ভাবক হিসেবে পরিচিত। ১৯৬২ ও ১৯৬৪ সালে প্রকাশিত তার \"The Gutenberg: The Making of Typographic Man\" এবং 'Understanding Media' এই দুটি গ্রন্থে সর্বপ্রথম বিশ্বগ্রাম সম্পর্কে ধারণা দেন।</p></div>"
+    },
+    {
+        "question": "<p>Who composed 'Paradise Lost'?</p>",
+        "options": ["John Donne", "John Keats", "John Dryden", "John Milton"],
+        "answer": 3,
+        "explanation": "<div class='explanation'><p>Paradise Lost একটি বিখ্যাত epic poem (মহাকাব্য) যা John Milton 1667 সালে রচনা করেন। এটি ইংরেজি সাহিত্যের সর্বশ্রেষ্ঠ মহাকাব্যগুলোর একটি, যেখানে আদম ও ইভ এর পাপ ও স্বর্গচ্যুতির কাহিনি বর্ণিত হয়েছে।</p><p>Milton এর আরও রচনা: Paradise Regained, Samson Agonistes, Areopagitica, Lycidas, On His Blindness etc. অন্যদিকে John Donne মেটাফিজিক্যাল কবি, 'Holy Sonnets' এর জন্য বিখ্যাত। John Keats রোমান্টিক যুগের কবি, \"Ode on a Grecian Urn\" এর রচয়িতা। John Dryden- neoclassical যুগের কবি, নাট্যকার ও অনুবাদক।</p></div>"
+    },
+    {
+        "question": "<p>What is the meaning of 'French leave'?</p>",
+        "options": ["Leave on holidays", "spending time in France", "Leave without permission", "Emergency leave"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>A(1,-1), B(2,2) এবং C(4,t) বিন্দুত্রয় সমরেখ হলে t এর মান</p>",
+        "options": ["<p>8</p>", "<p>6</p>", "<p>4</p>", "<p>7</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোন দেশের গৃহযুদ্ধের কারণে ইউরোপজুড়ে অভিবাসী সংকট সৃষ্টি হয়েছে?</p>",
+        "options": ["সিরিয়া", "লেবানন", "আফগানিস্তান", "ইরাক"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><p>ইউরোপের অভিবাসী সংকট বলতে মূলত সিরিয়া, ইরাক ও আফগানিস্তানের মতো দেশগুলোতে যুদ্ধ ও অস্থিরতার কারণে বিপুল সংখ্যক মানুষ ইউরোপে আশ্রয়প্রার্থী হিসেবে আসার ঘটনাকে বোঝায়। এই সংকটটি ২০১৫ সালে তীব্র আকার ধারণ করে। এই অভিবাসীদের মধ্যে বেশিরভাগই ছিল সিরিয়ার নাগরিক। তবে ২০১৫ সালের দিকে সিরিয়ার গৃহ যুদ্ধের ফলে তীব্র অভিবাসী সংকট সৃষ্টি হয়।</p></div>"
+    },
+    {
+        "question": "<p>বাংলা অব্যয়ীভাব সমাসের উদাহরণ ব্যাকরণের কোন অংশের অন্তর্ভুক্ত করা যায়?</p>",
+        "options": ["সন্ধি", "উপসর্গ", "কারক", "প্রত্যয়"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Choose the correct sentence.</p>",
+        "options": ["Where have you born?", "Where are you born?", "Where were you born?", "Where did you born?"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোন বানানটি প্রমিত?</p>",
+        "options": ["পশ্চাদপদ", "পশ্চাৎগামী", "পশ্চাদ্‌ভূমি", "পশ্চাৎবর্তী"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>টেকসই উন্নয়ন লক্ষ্য (এসডিজি) অর্জনে নিচের কোনটির গুরুত্ব সবচেয়ে বেশী?</p>",
+        "options": ["সক্ষমতা তৈরি", "অংশীদারিত্ব", "সমতা বিধান", "উপরের সবগুলো"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>জাতিসংঘের কোন সংস্থা বাংলাদেশ ও মায়ানমারের মধ্যকার রোহিঙ্গা বিষয়ে মধ্যস্থতা করছে?</p>",
+        "options": ["ইউএনডিপি", "ইউনিসেফ", "ইউএনএইচসিআর", "ইউনেস্কো"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশের পোশাক সর্বাধিক কোন দেশে রপ্তানী করা হয়?</p>",
+        "options": ["যুক্তরাষ্ট্র", "যুক্তরাজ্য", "ফ্রান্স", "জার্মানি"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোনটি বিশেষণ?</p>",
+        "options": ["সৎ", "একতা", "দর্শন", "জনতা"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>যদি U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, P = {1, 2, 5} এবং Q = {6, 7} হয় তবে <math><mi>P</mi><mo>∩</mo><msup><mi>Q</mi><mo>'</mo></msup></math> এর মান কত?</p>",
+        "options": ["P", "Q", "<math><mi>Q</mi><mo>'</mo></math>", "<math><msup><mi>P</mi><mo>'</mo></msup></math>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>২ ঘন্টা ৪০ মিনিট ৬ ঘন্টার কত অংশ?</p>",
+        "options": ["<p><math><mfrac><mi>১</mi><mi>৬</mi></mfrac></math></p>", "<p><math><mfrac><mi>১</mi><mi>৫</mi></mfrac></math></p>", "<p><math><mfrac><mi>৪</mi><mi>৯</mi></mfrac></math></p>", "<p><math><mfrac><mi>১</mi><mi>২</mi></mfrac></math></p>"],
+        "answer": 2,
+        "explanation": "<div class='explanation'>To determine why the provided answer is correct, we first need to convert ২ ঘন্টা ৪০ মিনিট into a fraction of ৬ ঘন্টা.\n\n1. **Convert the time**: \n&nbsp;&nbsp;&nbsp;- ২ ঘন্টা ৪০ মিনিট can be converted to hours. There are 60 minutes in an hour, so ৪০ মিনিট is equal to ২/৩ ঘন্টা (because 40/60 = 2/3). \n&nbsp;&nbsp;&nbsp;- Therefore, ২ ঘন্টা ৪০ মিনিট equals ২ + ২/৩ = ৮/৩ ঘন্টা.\n\n2. **Total time in question**:\n&nbsp;&nbsp;&nbsp;- ৬ ঘন্টা can be expressed as a fraction as ৬/১.\n\n3. **Calculate the fraction**:\n&nbsp;&nbsp;&nbsp;- To find what part ২ ঘন্টা ৪০ মিনিট (which is ৮/৩ ঘন্টা) is of ৬ ঘন্টা, you divide ৮/৩ by ৬/১, which is the same as multiplying by the reciprocal:\n&nbsp;&nbsp;&nbsp;- (৮/৩) ÷ (৬/১) = (৮/৩) * (১/৬) = ৮/(৩ * ৬) = ৮/১৮ = ৪/৯.\n\n4. **Final answer**:\n&nbsp;&nbsp;&nbsp;- Therefore, the answer, which is represented as <math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mfrac><mi>৪</mi><mi>৯</mi></mfrac></math>, corresponds to the fraction ৪/৯.\n\nThis is why the given answer is correct: it represents the fraction of ২ ঘন্টা ৪০ মিনিট in relation to ৬ ঘন্টা.\n                                                                                                                                                    <p class=\"text-muted fs-7 mt-2 mb-0\">AI-এর উত্তরে ভুল\n                                                                                থাকতে পারে।</p></div>"
+    },
+    {
+        "question": "<p>Ideal graft for coronary artery bipass graft is</p>",
+        "options": ["Great saphenous vein", "Ulner artery", "Radial artery", "Left internal mammary artery"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following drug can be used in a pregnant lady with Rheumatoid Arthritis?</p>",
+        "options": ["Methotrexate", "Salfasalazine", "Leflunamide", "Mycophenolate Mofetil"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Universally accepted indicator of health status of a population is-</p>",
+        "options": ["Child death rate", "Case fatality rate", "Infant mortality rate", "Under-5 mortality rate"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Choice of intravenous fluid in burn patient is</p>",
+        "options": ["Hartman's solution", "5% Dextrose in Aqua", "5% Dextrose in normal saline", "Hypertonic Normal saline"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Causative Organism responsible for Cervical cancer</p>",
+        "options": ["HSV", "HPV", "Chlamydia", "Herpes zoster"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Genital fistula can be prevented by</p>",
+        "options": ["Improving essential obstetric care", "Early operations of fibroid uterus", "Treating PID cases", "correcting maternal anaemia"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Fever is mediated by</p>",
+        "options": ["<p>Bradykinin</p>", "<p>Complements</p>", "<p>Hageman factor</p>", "<p>Interleukin-1</p>"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The base of heart is formed mainly by</p>",
+        "options": ["Left atrium", "Left Ventricle", "Right atrium", "Right Ventricle"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Indication of Circumcision</p>",
+        "options": ["Epispadias", "Hypospadias", "Undescended Testes", "Phimosis"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Excess CO<sub>2</sub> retention in blood leads to</p>",
+        "options": ["Metabolic acidosis", "Metabolic alkalosis", "Respiratory acidosis", "Respiratory alkalosis"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Part of Parasympathetic nervous system is</p>",
+        "options": ["Celiac ganglion", "Cervical ganglion", "Ciliary ganglion", "Sacral ganglion"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Cause of maternal death in Eclumpsia is</p>",
+        "options": ["Retained Placenta", "Ruptured Uterus", "Cerebral hemorrhage", "Septicemia"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The antigen presenting cell on skin is</p>",
+        "options": ["Basal cells", "Keralinocytes", "Langerhan cells", "Melanocytes"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Bony metastasis may occur in</p>",
+        "options": ["Carcinoma gall bladder", "Malignant melanoma", "Squamous Cell Carcinoma of skin", "Follicular Carcinoma of thyroid"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Autoimmune disease includes</p>",
+        "options": ["Bronchial asthma", "Hypertension", "Heart failure", "Rheumatic fever"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Ethambutol is rarely prescribed in children because it causes</p>",
+        "options": ["Peripheral neuropathy", "Hepatitis", "Rash", "Retrobulbar neuritis"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following is true for wound healing by secondary intention?</p>",
+        "options": ["Takes place is clean wound", "Fine scar formation", "Applicable for infected wound", "Less evidence of inflammation."],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Oligo hydromnios is sever in</p>",
+        "options": ["Gestational Diabetes", "Anencephaly", "Nulliparous women", "Renal agenesis of fetus"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Bone metabolism is the primary concern of</p>",
+        "options": ["Glucagon", "Growth hormone", "Parathyroid hormone", "Thyroid stimulating hormone"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Diabetes in pregnancy should be treated by</p>",
+        "options": ["Glipizide", "Metformin", "Insulin", "Rosiglitazone"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Consent become invalid if taken from</p>",
+        "options": ["Insane person", "Elderly person", "Illiterate person", "Sick person"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The largerst tributaries that drain into inferior Vena Cava is</p>",
+        "options": ["Left renal Vein", "Lumber Veins", "Hepatic Veins", "Right Renal Vein"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Megaloblastic anemia with peripheral neuropathy occur due to deficiency of</p>",
+        "options": ["Folic acid", "Iron", "Pyridoxine", "Vit B12"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Acid-Peptic disease include</p>",
+        "options": ["Inflammatory bowel disease", "Irritable bowel syndrome", "Non-ulcer dyspepsia", "Pyloric stenosis"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>CA-125 is the tumor marker for</p>",
+        "options": ["Breast cancer", "Colon cancer", "Ovarian cancer", "Pancreatic cancer"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Cause of severe dysmenorrhea in an adolescent girl is</p>",
+        "options": ["Endometriosis", "Polycystic ovary disease", "Adenomyosis", "Trichomomiasis"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Ligature mark in typical hanging is</p>",
+        "options": ["Completely encircling neck", "Contineous", "Obligue", "Transverse"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>In Bangladesh minimum recommended number of antenatal care (ANC) visit is</p>",
+        "options": ["Four", "Six", "Eight", "Twelve"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Component of secondary survey in a traumatic patient is</p>",
+        "options": ["Airway and cervical spine control", "Head to toe examination", "Translate ventilation", "Circulation and control of haemorrhage"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Detection of hidden disease among apparently healthy population is done by</p>",
+        "options": ["Screening", "Intervention", "Contact tracing", "Follow-up"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Programmed cell death is regulated by</p>",
+        "options": ["Endoplasmic reticulum", "Golgi apparatus", "Lysosome", "Mitochondria"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>A 45-year-old man has been suffering from cirrhosis of liver due to Hepatitis B Virus; the sign of decompression of cirrhosis is</p>",
+        "options": ["Loss of hair", "Splenomegaly", "Ascites", "Testicular atrophy"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following is not a typical presentation of pain in acute pancreatitis?</p>",
+        "options": ["Severe constant upper abdominal pain", "Radiation pain to back", "Absent muscle guarding", "Presence of rebound tenderness"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Congenital malformation can be attributed to maternal infection with-</p>",
+        "options": ["poliomyelitis", "Measles", "Chicken Pox", "Toxoplasmosis"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Symptoms of mild shock is</p>",
+        "options": ["Rise of respiratory rate", "Fall of blood pressure", "Reduced Urinary output", "Coma"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Most activity growing area of a long bone is</p>",
+        "options": ["Diaphysis", "Epiphysis", "Epiphysial Cartilage", "Metaphysis"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Co-administration of Phenobarbital &amp; warfarin shows</p>",
+        "options": ["Antiplatelet effect", "Fibrinolytic effect", "Increased bleeding tendency", "Thromboembolic episode"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which one of the following is reproductive organ?</p>",
+        "options": ["Uterus", "Urinary bladder", "Urethra", "Bone"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Utero-vaginal prolapse</p>",
+        "options": ["is a very painful condition", "is worse in erect posture", "is common in nulliparous women", "may resolve spontaneously"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Carpal tunnel consists of</p>",
+        "options": ["Median nerve", "Musculocutaneous nerve", "Radial nerve", "Ulnar nerve"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Absolute indication of splenectomy is</p>",
+        "options": ["Lymphoma", "Thelassemia", "Leukemia", "Grade V spleen injury"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Normal anion gap metabolic acidosis is found in</p>",
+        "options": ["Chronic renal failure", "Diabetic keto acidosis", "Methanol poisoning", "Renal tubular acidosis"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The EPI vaccine given at birth is</p>",
+        "options": ["BCG", "Diphtheria", "Measles", "Tetanus"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Solid tumor of ovary is</p>",
+        "options": ["Chocolate cyst of ovary", "Theca Lutein cyst", "Fibroma", "Parovarian cyst"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Clinical feature of minor surgical site infection is</p>",
+        "options": ["Mild sero-sanguineous discharge", "Copious purulent discharge", "Fever", "Formation of huge granulation tissue"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Dose schedule of a drug with half life 03 hours will be</p>",
+        "options": ["3 hourly", "6 hourly", "12 hourly", "Once daily"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Causes of painless Jaundice in surgical ward is</p>",
+        "options": ["Cholelithiasis", "Cholangitis", "Mucocele of gall bladder", "Peri-ampullary carcinoma"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which one is derived from mesoderm?</p>",
+        "options": ["Muscle", "Skin", "Nail", "Mucous membrane"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Forensic radiology deals with determination of</p>",
+        "options": ["Poison", "Foreign body", "Age", "Pregnancy"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Mycobacterium tuberculosis is stained by</p>",
+        "options": ["Giemsa stain", "Gram stain", "Silver stain", "Ziehl-Neelson stain"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Clinical feature of raised intracranial pressure is</p>",
+        "options": ["Raised respiratory rate", "Bradycardia", "Fever", "Hypotension"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Example of probability sampling is</p>",
+        "options": ["Stratified random sampling", "Quota sampling", "Purposive sampling", "Accidental sampling"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Majority of body fluid remains in</p>",
+        "options": ["Blood", "Intra cellular fluid", "Interstitial fluid", "Lymph"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Irreversible sign of vitamin-A deficiency is</p>",
+        "options": ["Bitot's spot", "Xerosis Conjunctive", "Keratomalacia", "Night blindness"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Component of Active management of third stage of labour (AMTSL) is</p>",
+        "options": ["Aortic compression", "inj. Oxytocin 10 units IM", "Perineal message", "examination of cervix"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>In normal pregnancy</p>",
+        "options": ["Factor X increases", "Anti thrombin III concentration increases", "Venous pressure falls", "Iron binding capacity falls"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Adverse drug reaction includes</p>",
+        "options": ["Synergism", "Antagonism", "Idiosyncracy", "Enzyme induction"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Uterine contractions in labour</p>",
+        "options": ["are consciously controllable", "are efficient at 5 mmHg", "start at fundus of uterus", "are painful due to ischemia"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The structural and functional unit of Lung is</p>",
+        "options": ["Alveoli", "Bronchiole", "Bronchus", "Trachea"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>A 35-year-old man came to you with following reports HbsAg (-VE), Anti HBc IgG (+VE), Anti HBc IgM(-VE), Anti HBs (+VE) which senario will match with the above mentioned reports</p>",
+        "options": ["Acute hepatitis (early)", "Convalescence", "Post infection", "Immunization without infection"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Criteria of an ideal suture material is</p>",
+        "options": ["Shrimable", "Non Predictable tissue behavior", "Non Electrolyte", "Carcinogenic"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Cephalosporin appropriate for renal impairment is</p>",
+        "options": ["Cefazolin", "Cefotetan", "Ceftriaxone", "Cefuroxime"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Fibrinolysis is done by</p>",
+        "options": ["Plasminogen", "Prothrombin", "Fibrinogen", "Haptoglobin"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Respiratory Center is Located in</p>",
+        "options": ["Medulla", "Spinal Cord", "Brain Cortex", "Cerebellum"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following is a compressible swelling?</p>",
+        "options": ["Neuro fibroma", "Chondroma", "Lymphoma", "Haemangioma"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>In ECG, which feature is indicative for thrombolytic therapy?</p>",
+        "options": ["New onset LBBB", "ST depression", "Appearance of Q wave", "T inversion"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following is a compelling indication of calcium channel blocker in the management of Hypertension?</p>",
+        "options": ["Heart failure", "Secondary stroke prevention", "Older patient", "Left ventricular dysfunction"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The largest gland of human body is</p>",
+        "options": ["Adrenal", "Liver", "Pancreas", "Thyroid"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Cause of intrauterine death (IUD) is</p>",
+        "options": ["Diabetes Mellitus", "Respiratory distress syndrome", "Breech presentation", "Bicornuate Uterus"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Antigen test for COVID-19 is featured by</p>",
+        "options": ["High accuracy", "High sensitivity", "High specificity", "Low cost"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Viral disease that may cause thrombocytopenia is</p>",
+        "options": ["SARS-Cov-2", "Influenza", "Dengue", "Hepatitis B"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>A 35-year-old woman presented with palpitation, excessive sweating and heat intolerence for 02 weeks; her serum <math><mi>F</mi><msub><mi>T</mi><mn>3</mn></msub><mo>&nbsp;</mo><mo>&amp;</mo><mo>&nbsp;</mo><mi>F</mi><msub><mi>T</mi><mn>4</mn></msub></math> levels were high and TSH level was undetectable; radio iodine uptake of thyroid gland was low. The most likely diagnosis is</p>",
+        "options": ["Graves disease", "Toxic adenoma", "Toxic multi-noduler goitre", "Sub acute thyroiditis"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The most common type of anaemia in pregnancy is</p>",
+        "options": ["<p>Thalassemia</p>", "<p>Hereditary Spherocytosis</p>", "<p>Iron deficiency anaemia</p>", "<p>Folic acid deficiency anaemia</p>"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>In Ectopic pregnancy</p>",
+        "options": ["Bleeding precedes pain", "Isthmus of fallopian tube in the commonest site of ectopic implantation", "incidence is more common among women taking oral contraceptives for long time", "Abdominal pain preceded by amenorrhoea"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>A 40-year-old man presented at Medicine OPD with recurrent haemoptysis for last 05 disegni Which one of the following is the most likely diagnosis</p>",
+        "options": ["Bronchiectasis", "Interstitial Lung disease", "Mitral Stenosis", "Long Canecr"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Cause of acute starvation is</p>",
+        "options": ["Self refusal", "Dysphasia", "Anorexia", "Entrapment in mine"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Protein is digested by</p>",
+        "options": ["Amylase", "Bile Salt", "Lipase", "Trypsin"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Common feature to all Spondylo arthritis is</p>",
+        "options": ["Symmetrical poly arthritis", "Conjunctivitis", "Positive HLA <math><msub><mi>B</mi><mn>27</mn></msub></math>", "Onal Ulicention"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Nerve responsible for sensation of smell is</p>",
+        "options": ["Olfactory", "Trigeminal", "Facial", "Oculomotor"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Multidrug resistant tuberculosis is treated by</p>",
+        "options": ["Amikacin", "Streptomycin", "Tazobactum", "Ethambutol"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Complication of Caesarean section is</p>",
+        "options": ["Postpartum Hemorrhage", "Vaginal stenosis", "Low platelet count", "Injury to liver"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Amniotic fluid embolism causes</p>",
+        "options": ["Hypertension", "Bronchodilatation", "Cyanosis", "Sever anaemia"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The most reliable clinical feature of strangulaed inguinal hernia is</p>",
+        "options": ["Pain", "Fever", "Tense and tender lump in the inguinal region", "Vomiting"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Secondary hypertension is caused by</p>",
+        "options": ["<p>Conn's Syndrome</p>", "<p>Bum</p>", "<p>Renal ischemia</p>", "<p>Septic Shock</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Lining of urinary tract is</p>",
+        "options": ["Ciliated Columnar epithelium", "Endothelium", "Mesothelium", "Transitional epithelium"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Scabies is characterized by</p>",
+        "options": ["Comedon", "Burrow", "Silvery Scale", "Wickman Striae"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Leukocyte induced acute tissue injury is</p>",
+        "options": ["Arthritis", "Asthma", "Atherosclerosis", "Pulmonary fibrosis"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following antidepressants does not have any weight gain property?</p>",
+        "options": ["Escitalopram", "Fluoxetine", "Paroxetine", "Sertraline"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Indication of hospitalization of a burn patient is</p>",
+        "options": ["5% burn in the trunk of an adult patient", "10% burn in the trunk of a child", "Inhalation burn", "10% Circumferential burn in the lower limb"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Late sign of death is</p>",
+        "options": ["adipocere formation", "cooling of body", "dilatation of pupils", "rigor mortis"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Most common cause of Epistaxis is</p>",
+        "options": ["Idiopathic", "Hypertension", "Thrombocytopenia", "Coagulation disorder"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Plasma albumin helps in</p>",
+        "options": ["Colloidal osmotic pressure maintenance", "Blood clotting", "Iron transport", "Copper transport"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>First step in blood coagulation is</p>",
+        "options": ["Activation of clotting factors", "Clot retraction", "Fibrin mesh formation", "Platelet aggregation"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Primary blood buffer system is</p>",
+        "options": ["Ammonia buffer", "Bicarbonate buffer", "Phosphate buffer", "Protein buffer"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The following layer of digestive tract contains nerves &amp; vessels</p>",
+        "options": ["Mucosa", "Muscular Layer", "Serous Layer", "Submucosa"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following is a common complication of SGLT<sub>2</sub> inhibitors?</p>",
+        "options": ["Genital infection", "Lactic acidosis", "Fluid retention", "Peripheral neuropathy"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Feature of atropinization is</p>",
+        "options": ["Mild dialated pupil", "Tachycardia", "Crepitation in Lungs", "Bronchorrhoea"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which of the following signs is characteristic for Stevens-Jhonson syndrome?</p>",
+        "options": ["Koebner phenomenon", "Auspitz sign", "Dimple sign", "Nikolsky sign"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Feature of a malignant ulcer is</p>",
+        "options": ["Undermined edge", "Undermined edge", "Everted edge", "sloping edge"],
+        "answer": 2,
+        "explanation": ""
+    }
+];
+</script>
+
+  
+<script>
+
+
+categoryNames = [];
+
+isAnswersSubmitted = false;
+
+
+function print(text){
+  output.innerText += text;
+}
+
+function clearOptions(list){
+  list.innerHTML = "";
+}
+function createOptions(list, options, isAscending){
+    if(!options) {return};
+    options.forEach((text) => {
+        option = document.createElement("option");
+        option.text = text;
+        if(isAscending) list.appendChild(option);
+        else list.insertBefore(option, list.firstChild);
+    });
+}
+
+function filterMcqs(){
+    goHome();
+    onLoadJsonMCQ();
+  //TODO: eval jsonMCQ
+  
+  
+  
+  
+  //print(mcqs[0].question);
+  //print(JSON.stringify(mcqs[0]));
+  //print(mcqs.length);
+  
+}
+
+function onLoadJsonMCQ(){
+  showExamDetails();
+  loadMCQs(mcqs);
+  //print(mcqs[0].question);
+  //print(JSON.stringify(mcqs[0]));
+  //print(mcqs.length);
+  
+}
+
+function showExamDetails(){
+    detailsDiv = document.querySelector("#exam-details");
+    detailsDiv.innerHTML = `
+        <p style="font-size:3vw;font-weight: normal;">
+        ${currentCategoryName}<br>
+        ${currentExamName}<br>
+        ${currentSubjectNames}<br></p>
+    `;
+}
+
+
+function initOptions(){
+    //filterMcqs();
+    //options = ["Option 1", "Option 2", "Option 3"];
+    
+        
+  
+  //subjectNames = JSON.parse(Android.getSubjects());
+  //createOptions(subjectList, subjectNames);
+}
+
+let currentQuestions = [];
+let incorrectAnswers = {};
+negScore = -0.25;
+const form = document.getElementById('quiz-form');
+const resultDiv = document.getElementById('result');
+
+
+
+
+function loadMCQs(mcqs) {
+  currentQuestions = mcqs;
+  incorrectAnswers = {};
+  document.getElementById("result").textContent = '';
+  //document.getElementById("home-top").style.display = "block";
+  document.getElementById("home-bottom").style.display = "flex";
+  document.getElementById("quiz-controls").style.display = "block";
+  renderQuiz(currentQuestions);
+};
+
+
+function getOption(index, option, i) {
+  const inputId = `q${index}_opt${i}`;
+      return `
+        <label for="${inputId}" class="answer-label" id="label-${inputId}">
+          <input type="radio" name="q${index}" id="${inputId}" value="${i}">
+          ${option}
+        </label><br>
+      `;
+}
+function getOptions(index, options) {
+    optionBlock = "";
+    for(i = 0; i < options.length; i++){
+        optionBlock += getOption(index, options[i], i);
+    }
+    return optionBlock;
+}
+
+function renderQuiz(questions) {
+    isAnswersSubmitted = false;
+    form.innerHTML = '';
+    questions.forEach((q, index) => {
+        card = document.createElement('div');
+        card.innerHTML = `
+            <div class="question-card">
+                <div class="question" data-locked="false" id="question-${index}">
+                    <p>${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${getOptions(index, q.options)}
+                    </div>
+                </div>
+                <div class="explanation-container">
+                    <button type="button" onclick="toggleExplanation(this, ${index})">▶ Reveal Answer</button>
+                    <div class="explanation-text" style="display:none; margin: 5px 0 0;">${q.explanation}</div>
+                </div>
+            </div>
+        `;
+        form.appendChild(card);
+    });
+  
+
+    document.getElementById("submit-button").style.display = "inline-block";
+    document.getElementById("retry-button").style.display = "none";
+}
+
+function clearOption(quesIndex, i) {
+    const label = document.getElementById(`label-q${quesIndex}_opt${i}`);
+    label.classList.remove('correct-answer', 'wrong-answer');
+}
+function clearOptions(quesIndex, len) {
+    for(i = 0; i < len; i++){
+        clearOption(quesIndex, i); 
+    }
+}
+
+function submitAll() {
+    let score = 0;
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let unansweredCount = 0;
+    incorrectAnswers = {};
+    isAnswersSubmitted = true;
+
+    currentQuestions.forEach((q, i) => {
+        selected = document.querySelector(`input[name="q${i}"]:checked`);
+        questionDiv = document.getElementById(`question-${i}`);
+        questionDiv.classList.remove('correct', 'incorrect');
+        clearOptions(i, q.options.length); 
+        
+        
+        if (selected) {
+            const selectedValue = parseInt(selected.value);
+            if (selectedValue === q.answer) {
+                score += 1;
+                correctCount++;
+                questionDiv.classList.add('correct');
+                document.getElementById(`label-q${i}_opt${selectedValue}`).classList.add('correct-answer');
+            } 
+            else {
+                score += negScore;
+                incorrectCount++;
+                questionDiv.classList.add('incorrect');
+                document.getElementById(`label-q${i}_opt${selectedValue}`).classList.add('wrong-answer');
+                document.getElementById(`label-q${i}_opt${q.answer}`).classList.add('correct-answer');
+                incorrectAnswers[i] = q;
+            }
+        } 
+        else {
+            unansweredCount++;
+            document.getElementById(`label-q${i}_opt${q.answer}`).classList.add('correct-answer');
+            incorrectAnswers[i] = q;
+        }
+    });
+
+    score = Math.max(score, 0);
+    resultDiv.innerHTML = `
+        <p style="font-size:3vw;font-weight: normal;">${currentCategoryName}<br>
+        ${currentExamName}<br>
+        ${currentSubjectNames}<br></p>
+        Score: ${score.toFixed(2)} / ${currentQuestions.length}<br>
+        Correct: ${correctCount}<br>
+        Incorrect: ${incorrectCount}<br>
+        Answered: ${correctCount + incorrectCount}<br>
+        UnAnswered: ${unansweredCount}
+    `;
+
+    document.getElementById("submit-button").style.display = "none";
+    if (incorrectCount + unansweredCount > 0) document.getElementById("retry-button").style.display = "inline-block";
+};
+
+window.submitQuiz = function() {
+submitAll();
+//document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+document.getElementById("result").scrollIntoView();
+
+};
+
+window.retryIncorrect = function() {
+    goHome();
+  const newQuestions = Object.values(incorrectAnswers);
+  if (newQuestions.length === 0) {
+    currentQuestions = [...originalQuestions];
+    resultDiv.textContent = '';
+        renderQuiz(currentQuestions);
+    return;
+  }
+  currentQuestions = newQuestions;
+  resultDiv.textContent = '';
+  renderQuiz(currentQuestions);
+};
+
+function toggleExplanation(button, index) {
+    container = button.parentElement;
+    card = container.parentElement;
+    if(!lockedInAnswer(card, index)) return;
+    
+  text = container.querySelector(".explanation-text");
+  
+  if (text.style.display === 'block') {
+    text.style.display = 'none';
+    button.textContent = '▶ Reveal Answer';
+  } else {
+    text.style.display = 'block';
+    button.textContent = '▼ Hide Answer';
+  }
+}
+
+function lockedInAnswer(card, index) {
+    questionDiv = card.querySelector(".question");
+    selected = questionDiv.querySelector('input[type="radio"]:checked');
+    isLocked = questionDiv.dataset.locked === "true";
+
+    if (isAnswersSubmitted || isLocked) return true;
+    if (!selected) {
+        Android.toast("LOCK-IN your answer first!");
+        return false;
+    }
+  
+    questionDiv.dataset.locked = "true";
+    questionDiv.classList.add("locked");
+    
+    questionDiv.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+    
+    q = currentQuestions[index];
+    chosen = parseInt(selected.value);
+    const isCorrect = chosen === q.answer;
+    
+    labels = questionDiv.querySelectorAll("label");
+    questionDiv.classList.add(isCorrect ? 'correct' : 'incorrect');
+    labels[chosen].classList.add(isCorrect ? 'correct-answer' : 'wrong-answer');
+    if(!isCorrect) labels[q.answer].classList.add('correct-answer');
+    
+    return true;
+}
+
+
+
+function goHome() {
+    document.querySelector("#exam-details").scrollIntoView();
+    /*
+  document.getElementById("quiz-form").innerHTML = "";
+  document.getElementById("result").textContent = "";
+  document.getElementById("category-buttons").style.display = "flex";
+  document.getElementById("home-top").style.display = "none";
+  document.getElementById("home-bottom").style.display = "none";
+  document.getElementById("quiz-controls").style.display = "none";
+  */
+}
+
+
+
+
+
+initOptions();
+onLoadJsonMCQ();
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
