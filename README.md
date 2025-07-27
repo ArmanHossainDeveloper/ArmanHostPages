@@ -1,2 +1,2 @@
-Preview Open the Page:
+Preview the Page:
 https://openalchemist.github.io/ArmanHostPages/
