@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primary Special</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f6f8fa;
+    padding: 10px;
+    margin: 0;
+    color: #333;
+}
+
+b {
+    font-size: 20px;
+}
+h1, h2, h3, h4 {
+	 text-align: center;
+}
+.section-title {
+    padding-left: 8px;
+    border-left: 5px solid #007bff;
+}
+
+/* Subject card with theme color */
+.subject-card {
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.subject-card h3 {
+    margin-top: 0;
+    font-size: 24px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    padding-bottom: 6px;
+}
+
+/* Video card stacked vertically */
+.video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.video-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff; /* thumbnail + title container white */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    text-decoration: none;
+    color: #222;
+    transition: 0.2s;
+}
+
+.video-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.video-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.video-title {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+
+
+      <div style="margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      color: #333;
+      text-align: center;
+      border-radius: 4vw;">
+
+<div id="image-holder" style="display: flex; ">
+    <img id="avater" style="display: inline-block;  margin: auto 3vw; height: 20vw; width:20vw; border-radius: 50%;" src="https://armanhossaindeveloper.github.io/ArmanHostPages/assets/images/avater.png"/>
+<div   style="display: inline-block;">
+<span >Developed by: Arman Hossain</span> <br>
+<div id="exam-details"><br>
+<b>PRIMARY SPECIAL</b><br>
+<b>Recorded Class</b>
+
+</div>
+
+</div>
+    
+
+</div>
+</div>
+
+
+
+
+
+
+<div id="content"></div>
+
+<script>
+// JSON data
+const data = {
+    "Bangla": ["EFCkZvSiyUQ","P7T0lGeZ_Ao","ff1ELLfGUZk","Zs8-wBK3lhE","tZbaszoB3Eg","N_kDJNH_SrQ","3kZAShqYDLg","qlT1LsGUweA","_-Ql0oCjN7o","OB7rFpQCNtU","DF8AzRorwbA","QAqfrrwIhAk"],
+    "English": ["tka1pdYTaKc","RR3DfCOxIJ0","kWa4dkyLIcQ","7kBobo4Jp3U","-9dSgLmo5sc","iYzfykx4dNg","F0YqFRsBIpk","yAmWk2Imk3w","y-VQ0aMPxTM","KjZSIRP355E","U_MQ_NTlXLk","bVgAqT6Aee4","Vg_OSsspmsU","hXr2i4iZmIw","BUloTlm_hmw"],
+    "Math": ["FvmNbqLXkc8","JBD-qPEL_dU","K-e7O8K8hL8","_527iLXsQ00","X9E0A9ON6Z0","O9BBhT0DDDo","fZvEhgmvMkI","QDU-CzEaXQ0","3602bD4d7EY","TQNEzLHf5ds","XCKknGL61Is","Bse_aDKVaK8","yYBKPyWB2-k","T_KhpEKCdk8","gXICIH8F_xw","hSIGTcxZBTA","81VT2etmmsM","3-fVZT0aKJY","Q41DuLuq7Rw","3lyPl1ZCRUg"],
+    "Bangladesh Affairs": ["gjULVLZq_mE","tTn6HuQfS1Y","d2F5D7PIQy4","ajs98HUZ3BU","BWaPU8FWuSk","1EdVnEBt3ow"],
+    "International Affairs": ["fkIbDuBWpd8","pMA47MyZbTI","5LqgCV6z28Y","l0I2FqrMKSE","iqv8qwXq4lw"],
+    "ICT": ["6AxEKaMdiIQ"]
+};
+
+// Subject theme colors
+const themeColors = {
+    "Bangla": "#FFF3E0",
+    "English": "#E3F2FD",
+    "Math": "#E8F5E9",
+    "Bangladesh Affairs": "#FFFDE7",
+    "International Affairs": "#F3E5F5",
+    "ICT": "#ECEFF1"
+};
+
+// Render function
+function render() {
+    const container = document.getElementById("content");
+
+    for (let subject in data) {
+        let card = document.createElement("div");
+        card.className = "subject-card";
+        card.style.backgroundColor = themeColors[subject] || "#fff";
+
+        let title = document.createElement("h3");
+        title.textContent = subject;
+        card.appendChild(title);
+
+        let list = document.createElement("div");
+        list.className = "video-list";
+
+        data[subject].forEach((id, index) => {
+            let cardLink = document.createElement("a");
+            cardLink.className = "video-card";
+            cardLink.href = `https://youtube.com/watch?v=${id}`;
+            cardLink.target = "_blank";
+
+            cardLink.innerHTML = `
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Class ${index+1}">
+                </div>
+                <div class="video-title">${subject} Class ${String(index+1).padStart(2,'0')}</div>
+            `;
+            list.appendChild(cardLink);
+        });
+
+        card.appendChild(list);
+        container.appendChild(card);
+    }
+}
+
+render();
+</script>
+
+</body>
+</html>
