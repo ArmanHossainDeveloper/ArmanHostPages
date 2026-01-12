@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script>
+
+currentCategoryName = "প্রাথমিক শিক্ষা অধিদপ্তর";
+currentExamName = "প্রাথমিক সহকারী শিক্ষক নিয়োগ-2026";
+currentSubjectNames = "Date: 09-01-2026";
+
+mcqs = [
+    {
+        "question": "<p>নিচের কোন সংখ্যাটি সবচেয়ে বড়?</p>",
+        "options": ["<math><msqrt><mi>০</mi><mo>.</mo><mi>৩</mi></msqrt></math>", "০.৩", "০.২", "<math><msqrt><mi>০</mi><mo>.</mo><mi>২</mi></msqrt></math>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলা বর্ণমালায় অর্ধ মাত্রার বর্ণ কয়টি?</p>",
+        "options": ["০৮টি", "০৯টি", "১০টি", "০৭টি"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>‘সাবান’ ও 'আনারস' শব্দ দুটি কোন ভাষা থেকে আগত?</p>",
+        "options": ["<p>পর্তুগিজ</p>", "<p>আরবি</p>", "<p>ফরাসি</p>", "<p>ফার্সি</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'কুল কাঠের আগুন' এর প্রকৃত অর্থ কী?</p>",
+        "options": ["তীব্রজ্বালা", "অমিতব্যয়ী", "উজ্জ্বল আলো", "প্রতিভাবান"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Find out the correct sentence</p>",
+        "options": ["Knowing little algebra, the problem was difficult to solve.", "Knowing little algebra, I found it difficult to solve the problem.", "Knowing little algebra. solving the problem was difficult.", "Knowing little algebra, it was difficult to solve the problem."],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Bank close at 4 pm _____ ?Make a tag question?</p>",
+        "options": ["must they", "don't they", "isn't they", "do they"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বিশ্বের প্রাচীনতম বিশ্ববিদ্যালয় কোনটি?</p>",
+        "options": ["অক্সফোর্ড", "কেমব্রিজ", "আল আজহার", "নালন্দা"],
+        "answer": 3,
+        "explanation": "<div class='explanation'><p>বিশ্বের প্রাচীনতম বিশ্ববিদ্যালয় নালন্দা বিশ্ববিদ্যালয়।</p><p>এটি ভারত বিহার রাজ্যে অবস্থিত।</p><p>নালন্দা বিশ্ববিদ্যালয় প্রতিষ্ঠিত হয় ৪২৭ অব্দে সম্রাট কুমারগুপ্তের রাজত্বকালে।</p><p>মুশরের কায়রোতে অবস্থিত আল আজহার বিশ্ববিদ্যালয়।</p></div>"
+    },
+    {
+        "question": "<p><math><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>3</mn></msup><mo>-</mo><mn>2</mn><mi>x</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>10</mn></math> হলে ƒ (0) কত?</p>",
+        "options": ["1", "5", "8", "10"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বিশেষণের সাথে বিশেষ্যের যে সমাস হয় তার নাম কী?</p>",
+        "options": ["বহুব্রীহি সমাস", "দ্বন্দ্ব সমাস", "কর্মধারয় সমাস", "তৎপুরুষ সমাস"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>সরকারি প্রাথমিক বিদ্যালয়ের সহকারী শিক্ষকদের নিয়োগকারী কর্তৃপক্ষ কে?</p>",
+        "options": ["মহাপরিচালক, প্রাথমিক শিক্ষা অধিদপ্তর", "সচিব, প্রাথমিক ও গণশিক্ষা মন্ত্রণালয়", "উপজেলা প্রাথমিক শিক্ষা অফিসার", "জেলা প্রাথমিক শিক্ষা অফিসার"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>সমার্থক শব্দগুচ্ছ সনাক্ত করুন-</p>",
+        "options": ["দীঘি, নদী, প্রণালী", "শৈবালনী, তরঙ্গিনী, সরিৎ", "গাঙ, তটিনী, অর্ণব", "স্রোতস্বিনী, নির্ঝরিণী, সিন্ধু"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>UNFCCC এর পূর্ণরূপ কী?</p>",
+        "options": ["United Nations Fund for Climate Control Council", "United Nations Framework Convention Climate Council", "United Nations Framework Convention on Climate Change", "United Nations Forest Conservation Climate Council"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>জলবায়ু পরিবর্তনের রূপরেখা সম্মেলন (ইংরেজি: United Nations Framework Convention on Climate Change), সংক্ষেপে ইউএনএফসিসিসি বা এফসিসিসি (UNFCCC বা FCCC), জাতিসংঘের পরিবেশ সংক্রান্ত একটি বৈশ্বিক চুক্তি, যা ১৯৯২ খ্রিস্টাব্দের ৩ জুন থেকে ১৪ জুন তারিখে রিও ডি জেনেরিওতে অনুষ্ঠিত জাতিসংঘের পরিবেশ ও উন্নয়ন (UNCED) শীর্ষক সম্মেলনে (যে সম্মেলন \"আর্থ সামিট\" নামে সাধারণের কাছে পরিচিত) সাক্ষরিত হয়। এই চুক্তির মূল লক্ষ্য ছিল বায়ুমণ্ডলে গ্রিনহাউজ গ্যাস নির্গমনের হার এমন অবস্থায় স্থিতিশীল রাখা, যাতে জলবায়ুগত মানবিক পরিবেশের জন্য তা বিপত্তিকর না হয়।</p></div>"
+    },
+    {
+        "question": "<p>Fill in the blank with right option ‘I am looking forward _____ you.’</p>",
+        "options": ["to seeing", "to have seen", "seeing", "to see"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>১ - ০.০৯৯৯ = ?</p>",
+        "options": ["০.৯০০১", "০.১", "০.০০১", "০.০০০১"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাগধারা যুগলের মধ্যে কোন জোড়া সর্বাধিক সমার্থক?</p>",
+        "options": ["অমাবস্যার চাঁদ, আকাশ কুসুম", "বক ধার্মিক, বিড়াল তপস্বী", "দুই কাতলা, কেউকেটা", "বক ধার্মিক, ভিজে বিড়াল"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>‘সবার উপর মানুষ সত্য তাহার উপর নাই’ এই পঙক্তিটির রচয়িতা কে?</p>",
+        "options": ["বিবেকানন্দ", "চন্ডীদাস", "বিদ্যাপতি", "রামকৃষ্ণ"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'শিশুগণ দেয় মন নিজ নিজ পাঠে' এখানে পাঠে শব্দটি কোন কারকে কোন বিভক্তি?</p>",
+        "options": ["অধিকরণে সপ্তমী", "অপাদানে পঞ্চমী", "কর্মে পঞ্চমী", "অধিকরণে পঞ্চমী"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশের প্রথম শিক্ষা কমিশন কোনটি?</p>",
+        "options": ["কুদরত-ই-খুদা কমিশন", "মফিজ উদ্দিন কমিশন", "সামসুল হক কমিশন", "মাজেদ খান কমিশন"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><p>২৬ জুলাই ১৯৭২ বাংলাদেশের প্রথম শিক্ষা কমিশন ‘কুদরাত’ - এ খুদা শিক্ষা কমিশন’ গঠিত হয়। এ কমিশন উদ্বোধন করেন তৎকালীন রাষ্ট্র নায়ক শেখ মুজিবর রহমান। ‘শামসুল হক শিক্ষা কমিশন’ ড. এম শামসুল হকের নেতৃত্বে ১৯৯৭ সালে গঠিত হয়। শরীফ কমিশনের রিপোর্টের বিরুদ্ধে ১৯৬২ সালে তৎকালীন পূর্ব পাকিস্তানে ব্যাপক ছাত্র বিক্ষোভ সংঘটিত হয়।</p></div>"
+    },
+    {
+        "question": "<p>কোন বানানটি শুদ্ধ?</p>",
+        "options": ["নীরীক্ষন", "নীরিক্ষণ", "নিরিক্ষণ", "নিরীক্ষণ"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>সহপাঠির অনুভূতি বুঝতে পারা কোন ধরনের লক্ষণ?</p>",
+        "options": ["ভাষাগত", "জ্ঞানগত", "আবেগগত", "ইচ্ছাগত"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'অরণ্যে রোদন' বাগধারার ইংরেজি অনুবাদ করুন-</p>",
+        "options": ["Wild cries", "Wild forest", "Cry in the wilderness", "Weep at forest"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>অরণ্যে রোদন' is a Bengali phrase which literally translates to 'crying in the forest'. However, in English, the phrase 'cry in the wilderness' is a common idiomatic expression which means to express an unpopular or futile opinion. </p></div>"
+    },
+    {
+        "question": "<p>'To beat about the bush' means</p>",
+        "options": ["to hide the truth", "to speak directly", "to delay the matter", "to talk irrelevantly"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which period is known as the 'golden age' of English literature</p>",
+        "options": ["the Eighteen century", "the victorian age", "the Elizabethan age", "the Restoration age"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বৃত্তের ব্যাস তিনগুণ বৃদ্ধি করলে ক্ষেত্রফল কতগুণ বৃদ্ধি পাবে?</p>",
+        "options": ["<p>৯</p>", "<p>১২</p>", "<p>১৬</p>", "<p>৪</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>রবীন্দ্রনাথ ঠাকুরের 'তোতা কাহিনী' গল্পে তোতা কীসের প্রতীক?</p>",
+        "options": ["শিক্ষকের", "গণকঠাকুরের", "শিশুর", "গবেষকের"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>উল্লাস এর সন্ধি বিচ্ছেদ কোনটি?</p>",
+        "options": ["উল + লাস", "ঊৎ+ লাস", "উ + লাস", "উৎ + লাস"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which one is wrong spelling?</p>",
+        "options": ["Happiness", "Necessary", "Prosparity", "Influence"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাক্যের ক্ষুদ্রতম একক কোনটি?</p>",
+        "options": ["শব্দ", "চিহ্ন", "বর্ণ", "ধ্বনি"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Who wrote the novel. \"the god of small things\"</p>",
+        "options": ["Kiran Deshai", "Anita Desai", "Arundhuti Ray", "Orhan Pamuk"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'হৃদয় মাঝে মেঘ উদয় করি, নয়নের মাঝে ঝড়িল বারি', এখানে কী ধরনের অলংকারের প্রয়োগ হয়েছে?</p>",
+        "options": ["বিষম", "বিরোধাভ্যাস", "অসংগতি", "বিভাবনা"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>গ.সা.গু. নির্ণয় করুন: <math><mn>4</mn><msup><mi>a</mi><mn>2</mn></msup><mo>-</mo><mn>1</mn><mo>,</mo><mo>&nbsp;</mo><mn>2</mn><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mo>-</mo><mn>1</mn></math></p>",
+        "options": ["a+1", "2a+1", "a-1", "2a-1"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>১৮ ফুট উঁচু একটি খুঁটি এমনভাবে ভেঙে গেল যে ভাঙা অংশটি বিচ্ছিন্ন না হয়ে ৩০° কোণে মাটি স্পর্শ করল। খুঁটিটি মাটি হতে কত উঁচুতে ভেঙেছিল?</p>",
+        "options": ["৩ ফুট", "১২ ফুট", "৯ ফুট", "৬ ফুট"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'জোছনা' কোন শ্রেণির শব্দ?</p>",
+        "options": ["যৌগিক", "তৎসম", "দেশি", "অর্ধতৎসম"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বিশ্ব মানবাধিকার দিবস কবে?</p>",
+        "options": ["২৬ জুন", "০১ আগস্ট", "১০ ডিসেম্বর", "০১ মে"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>মানবাধিকার দিবস জাতিসংঘের নির্দেশনায় বিশ্বের সকল দেশে প্রতি বছর ১০ ডিসেম্বর পালিত হয়। জাতিসংঘের সাধারণ পরিষদ কর্তৃক ১০ ডিসেম্বর, ১৯৪৮ সাল থেকে দিবসটি উদ্‌যাপন করা হয়। এছাড়াও, 'সার্বজনীন মানব অধিকার সংক্রান্ত ঘোষণাকে' বাস্তবায়নের লক্ষ্যে এ তারিখকে নির্ধারণ করা হয়। সার্বজনীন মানব অধিকার ঘোষণা ছিল দ্বিতীয় বিশ্বযুদ্ধ পরবর্তী নবরূপে সৃষ্ট জাতিসংঘের অন্যতম বৃহৎ অর্জন।</p></div>"
+    },
+    {
+        "question": "<p>'Salt of life' stands for-</p>",
+        "options": ["Saline water", "Sodium chloride", "Valuable things", "Sorrows of life"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোনো ত্রিভুজের তিনটি বাহুকে বর্ধিত করলে উৎপন্ন বহিঃস্থ কোন তিনটির সমষ্টি কত?</p>",
+        "options": ["<p>৩৬০°</p>", "<p>১৮০°</p>", "<p>১৬০°</p>", "<p>২৭০°</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Ayesha is a good girl বাক্যে girl শব্দটি-</p>",
+        "options": ["material noun", "proper noun", "common noun", "collective noun"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>\"To err is human, forgive divine\", is a line of a poem by.</p>",
+        "options": ["Pope", "Shelley", "Milton", "Shakespeare"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোনটি নঞ তৎপুরুষ নয়?</p>",
+        "options": ["অনেক", "অপরাহ্ন", "অনিষ্ট", "অনৈক্য"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>ARRANGE শব্দটির বর্ণগুলো কত প্রকারে সাজানো যায়, যাতে R-দুইটি পাশাপাশি থাকবে না।</p>",
+        "options": ["৩৬০", "৯৪০", "৯০০", "১২৬০"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p><math><mfrac><mrow><msup><mi>a</mi><mn>2</mn></msup><msup><mi>b</mi><mn>3</mn></msup></mrow><mrow><msup><mi>c</mi><mn>2</mn></msup><mi>d</mi></mrow></mfrac></math> কে <math><mfrac><mrow><msup><mi>a</mi><mn>3</mn></msup><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mi>c</mi><msup><mi>d</mi><mn>3</mn></msup></mrow></mfrac></math> দ্বারা ভাগ করলে ভাগফল কত হবে?</p>",
+        "options": ["<math><mfrac><mrow><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mi>c</mi><mi>a</mi></mrow></mfrac></math>", "<math><mfrac><mrow><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mi>c</mi><mi>d</mi></mrow></mfrac></math>", "<math><mfrac><mrow><msup><mi>b</mi><mn>2</mn></msup><mi>c</mi></mrow><mrow><mi>a</mi><mi>d</mi></mrow></mfrac></math>", "<math><mfrac><mrow><mi>b</mi><msup><mi>d</mi><mn>2</mn></msup></mrow><mrow><mi>a</mi><mi>c</mi></mrow></mfrac></math>"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলায় অনুবাদ করুন I am sick of him</p>",
+        "options": ["সে আমাকে অসুস্থ করে দিয়েছে", "তাকে আমার অসহ্য লাগে", "সে যে অসুস্থ আমি তা জানি", "আমি তার কারণে অসুস্থ"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'মরিতে চাহিনা আমি সুন্দর ভুবনে, মানবের মাঝে আমি বাঁচিবারে চাই, পঙক্তিটি কার রচনা -</p>",
+        "options": ["সিকান্দার আবু জাফর", "শরৎচন্দ্র চট্টোপাধ্যায়", "রবীন্দ্রনাথ ঠাকুর", "কাজী নজরুল ইসলাম"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>২০২৫ সালে নোবেল শান্তি পুরস্কার বিজয়ী হলেন-</p>",
+        "options": ["ওমর এস ইয়াসি", "জন এস মার্টিনিস", "মারিয়া কোরিনা মাচাদো", "রিচার্ড রবসন"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>২০২৫ সালের নোবেল শান্তি পুরস্কার পেয়েছেন ভেনেজুয়েলার মারিয়া কোরিনা মাচাদো। গণতন্ত্র ও মানবাধিকারের জন্য দীর্ঘদিনের সংগ্রামের স্বীকৃতি হিসেবে ভেনেজুয়েলার এই রাজনীতিককে এ বছরের নোবেল শান্তি পুরস্কার দেওয়া হয়।</p><p>শান্তিতে নোবেল পুরস্কার - ২০২৫<br>শান্তিতে এবারের নোবেল পুরস্কার লাভ করেছেন - ১ জন।</p><p>মারিয়া কোরিনা মাচাদো (Maria Corina Machado)</p><p>❐ অবদান:<br>ভেনেজুয়েলার জনগণের গণতান্ত্রিক অধিকার প্রতিষ্ঠায় অবিরাম প্রচেষ্টা এবং একনায়কতন্ত্র থেকে ন্যায়ভিত্তিক ও শান্তিপূর্ণ গণতন্ত্রে উত্তরণের সংগ্রামের জন্য তিনি এই পুরস্কারে ভূষিত হচ্ছেন।<br>[\"for her tireless work promoting democratic rights for the people of Venezuela and for her struggle to achieve a just and peaceful transition from dictatorship to democracy.\"]</p></div>"
+    },
+    {
+        "question": "<p>দীনবন্ধু মিত্রের প্রহসন কোনটি?</p>",
+        "options": ["বুড়ো শালিকের ঘাড়ে রোঁ", "বিয়ে পাগলা বুড়ো", "কিঞ্চিৎ জলযোগ", "লীলাবতী"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>আন্তর্জাতিক মাতৃভাষা দিবস কোন সালে স্বীকৃত হয়?</p>",
+        "options": ["১৯৯৮", "১৯৯৯", "২০০০", "২০০১"],
+        "answer": 1,
+        "explanation": "<div class='explanation'><p>বাঙালি জাতির ১৯৫২ সালের আত্মত্যাগের দীর্ঘ ৪৭ বছর পর ১৯৯৯ সালের ১৭ নভেম্বর UNESCO ২১ ফেব্রুয়ারিকে 'আন্তর্জাতিক মাতৃভাষা দিবস' হিসেবে স্বীকৃতি প্রদান করে। ২০০০ সালের ২১ ফেব্রুয়ারি UNESCO - র ১৮৮ টি সদস্য রাষ্ট্রে এটি প্রথমবারের মতো পালিত হয়।</p></div>"
+    },
+    {
+        "question": "<p>বাতাসের কোন উপাদান মাটির উর্বরতা বৃদ্ধিতে সাহায্য করে-</p>",
+        "options": ["নাইট্রোজেন", "জলীয় বাষ্প", "অক্সিজেন", "কার্বন ডাই-অক্সাইড"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p><math><mfrac><mi>৫</mi><mi>৬</mi></mfrac></math>এর <math><mfrac><mi>৬</mi><mi>৭</mi></mfrac></math> + <math><mi>১</mi><mfrac><mi>৩</mi><mi>৭</mi></mfrac></math> এর সাথে কত যোগ করলে যোগফল ১ হবে?</p>",
+        "options": ["<math><mfrac><mi>২</mi><mi>৩</mi></mfrac></math>", "<math><mfrac><mi>১</mi><mi>৪</mi></mfrac></math>", "<math><mfrac><mi>১</mi><mi>২</mi></mfrac></math>", "<math><mfrac><mi>১</mi><mi>৩</mi></mfrac></math>"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>প্রত্যেক ভাষার ০৩টি মৌলিক অংশ হলো-</p>",
+        "options": ["ধ্বনি, শব্দ, বাক্য", "বর্ণ, সমাস, সন্ধি", "সমাস, কারক, ধ্বনি", "পদ, বর্ণ, ধ্বনি"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'Syntax' means-</p>",
+        "options": ["Sentence building", "Suplimentary tax", "Synchronizing act", "Manner of speech"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Amin said, \"I shall go to school.\" change the sentence to indirect speech-</p>",
+        "options": ["Amin said that he would go to school.", "Amin said that I shall go to school.", "Amin said that I would go to school.", "Amin said that he will go to school."],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'Out and Out' means -</p>",
+        "options": ["<p>Thoroughly</p>", "<p>Whole heartedly</p>", "<p>Not at all</p>", "<p>Brave</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>৩০ টাকা ৭৫ টাকার শতকরা কত?</p>",
+        "options": ["৪০%", "৩৫%", "২৫%", "<math><mi>৩</mi><mi>৭</mi><mfrac><mi>১</mi><mi>২</mi></mfrac></math> %"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>একটি স্কুলের ৭০% ছাত্র ফুটবল, ৭৫% ছাত্র হকি এবং ৮০% ছাত্র ক্রিকেট পছন্দ করে। ঐ স্কুলের কত শতাংশ ছাত্র ০৩টি খেলাই পছন্দ করে?</p>",
+        "options": ["৩৫%", "৫০%", "২৫%", "৩০%"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>একজন বাংলাভাষী শিশুর প্রাথমিক শিক্ষায় প্রথম ধাপ কী?</p>",
+        "options": ["বাংলা ও গণিতের স্বাক্ষরতা", "বাংলা ও ইংরেজিতে দক্ষতা", "বাংলা ও আরবিতে দক্ষতা", "স্বাক্ষরতা"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>পিতা ও পুত্রের বয়সের সমষ্টি ৭০ বছর । ০৭ বছর আগে তাদের বয়সের অনুপাত ছিল ৬ : ১ । ০৫ বছর পর তাদের বয়সের অনুপাত কত হবে?</p>",
+        "options": ["৩ : ১", "৫ : ১", "৭ : ২", "৪ : ১"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>নিচের কোনটি সামঞ্জস্যপূর্ণ নয়?</p>",
+        "options": ["ফেসবুক", "টুইটার", "লিংকড ইন", "উইকিপিডিয়া"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কাজী নজরুল ইসলামের বিদ্রোহী কবিতাটি কোন ছন্দে লিখিত?</p>",
+        "options": ["অক্ষরবৃত্ত ছন্দ", "গদ্য ছন্দ", "মাত্রাবৃত্ত ছন্দ", "সরবৃত্ত ছন্দ"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Profession of teaching-</p>",
+        "options": ["History", "Linguistic", "Teachership", "Pedagogy"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>টাকায় ১০টি ও টাকায় ১৫টি করে সমান সংখ্যক লিচু কিনে সব লিচু টাকায় ১২টি করে বিক্রয় করলে শতকরা কত লাভ বা ক্ষতি হবে?</p>",
+        "options": ["৩০% লাভ", "লাভ বা ক্ষতি কিছুই হবে না", "২৫% লাভ", "২৫% ক্ষতি"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The correct passive form of \"you must shut these doors\" is-</p>",
+        "options": ["These doors must be shut", "These must be shut doors", "Shut must be the doors", "Shut the doors you must"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Never tell a lie. what is the passive form?</p>",
+        "options": ["A lie is never told", "A lie is never be told", "Let a lie never be told", "Let not a lie be told ever."],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Which sentence is correct?</p>",
+        "options": ["He is an MA", "He is an LMAF", "All of them", "You are an MBBS"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>নিচের কোন রেখাটি বাংলাদেশের মধ্য দিয়ে গিয়েছে?</p>",
+        "options": ["কর্কট ক্রান্তি রেখা", "মকর ক্রান্তি রেখা", "সুমেরু বৃত্ত", "বিষুব রেখা"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><p>বাংলাদেশের মধ্যভাগ দিয়ে অতিক্রম করেছে কর্কটক্রান্তি রেখা বা 90 ডিগ্রি পূর্ব দ্রাঘিমা রেখা বা ট্রপিক অফ ক্যান্সার।</p></div>"
+    },
+    {
+        "question": "<p>কেন্দ্রীয় শহিদ মিনারের স্থপতি কে?</p>",
+        "options": ["হামিদুর রহমান", "হামিদুজ্জামান", "লুই আই কান", "তানভীর কবির"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><p>হামিদুর রহমান ছিলেন একজন বিখ্যাত চিত্রশিল্পী ও স্থপতি। তিনি ১৯৫৭ সালে কেন্দ্রীয় শহীদ মিনারের নকশা করেন। তাঁর নকশায় বাঙালি জাতির আত্মত্যাগ ও ভাষা আন্দোলনের চেতনার প্রতিফলন ঘটে। শহীদ মিনারের মূল নকশাটি বাস্তবায়িত হতে অনেক চ্যালেঞ্জের মুখোমুখি হয়, কিন্তু পরবর্তীতে এটি দেশের স্বাধীনতা ও ভাষার প্রতীকের রূপ নেয়।</p></div>"
+    },
+    {
+        "question": "<p>নবায়নযোগ্য জ্বালানী কোনটি?</p>",
+        "options": ["কমলা", "পেট্রোল", "পরমাণু শক্তি", "প্রাকৃতিক গ্যাস"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p><math><msup><mrow><mo>(</mo><mi>০</mi><mo>.</mo><mi>০</mi><mi>০</mi><mi>৪</mi><mo>)</mo></mrow><mi>২</mi></msup><mo>=</mo><mo>?</mo></math></p>",
+        "options": ["০.০০৬", "০.০০১৬", "০.০০০১৬", "০.০০০০১৬"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>শিক্ষাদানের প্রথম ধাপ কোনটি?</p>",
+        "options": ["পাঠ পরিকল্পনা", "প্রশ্নোত্তর", "পর্যালোচনা", "মূল্যায়ন"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'অধ্যয়ন' শব্দের বিশেষণ কী?</p>",
+        "options": ["অধ্যয়নকৃত", "অধীত", "অধ্যয়নরত", "পঠিত"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোন শব্দে 'সম্যক' অর্থে 'পরা' উপসর্গটি ব্যবহৃত হয়েছে?</p>",
+        "options": ["পরাধীন", "পরাগায়ন", "পরামর্শ", "পরাক্রান্ত"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাধ্যতামূলক প্রাথমিক শিক্ষা আইন পাস হয় কোন সালে?</p>",
+        "options": ["১৯৯০", "১৯৯১", "১৯৯২", "১৯৯৩"],
+        "answer": 0,
+        "explanation": "<div class='explanation'><p>বাংলাদেশে বাধ্যতামূলক প্রাথমিক শিক্ষা আইন পাশ হয় ১৯৯০ সালে। ১ জানুয়ারি ১৯৯২ প্রাথমিকভাবে ৬৮টি উপজেলায় বাধ্যতামূলক প্রাথমিক শিক্ষা চালু হয়। তবে দেশব্যাপী চালু হয় ১ জানুয়ারি ১৯৯৩।</p></div>"
+    },
+    {
+        "question": "<p>কোন পদটি সাংবিধানিক পদ নয়?</p>",
+        "options": ["প্রধান নির্বাচন কমিশনার", "চেয়ারম্যান, বাংলাদেশ সরকারী কর্ম কমিশন", "চেয়ারম্যান, জাতীয় মানবাধিকার কমিশন", "মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক"],
+        "answer": 2,
+        "explanation": "<div class='explanation'><p>চেয়ারম্যান, মানবাধিকার কমিশন পদটি সাংবিধানিক পদ নয়।</p><p>প্রধান নির্বাচন কমিশনার,</p><p>চেয়ারম্যান, সরকারী কর্মকমিশন,</p><p>মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক,</p><p>উত্তর তিনটি পদ সাংবিধানিক পদ।</p></div>"
+    },
+    {
+        "question": "<p>The most famous poet of English literature is .</p>",
+        "options": ["William Wordsworth", "T. S. Eliot", "John dryden", "Alexander pope"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Neither the moon nor the stars _________ visible last night. The verb to fill in the gap should be -</p>",
+        "options": ["are", "were", "had been", "was"],
+        "answer": 1,
+        "explanation": ""
+    },
+    {
+        "question": "<p>The writer was popular ________ young readers (fill in the blank)</p>",
+        "options": ["at", "of", "with", "for"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>শিশুর কোন আচরণটি সামাজিক বিকাশের উদাহরণ?</p>",
+        "options": ["পড়াশোনায় ভালো ফল করা", "ছবি আঁকায় পারদর্শীতা", "বন্ধুদের সাথে খেলাধুলা", "শ্রেণিকক্ষে নির্দেশ মেনে চলা"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বাংলাদেশ ক্রিকেট দল কোন সালে টেস্ট ক্রিকেটের মর্যাদা লাভ করে?</p>",
+        "options": ["১৯৯৯", "২০০০", "২০০১", "১৯৯৮"],
+        "answer": 1,
+        "explanation": "<div class='explanation'><p>বাংলাদেশ টেস্ট ক্রিকেটের দশম সদস্য হিসেবে খেলার মর্যাদা পায় ২৬ জুন ২০০০ । প্রথম টেস্ট ত্রিভুজ খেলে ভারতের সাথে। বাংলাদেশ ১৫ জুন ১৯৯৭ ও ক্রিকেট খেলার মর্যাদা লাভ করে। বিশ্বকাপ ক্রিকেটে বিশ্বকাপে ১৯৯৯ সালের ১৭ মে নিউজিল্যান্ডের বিপক্ষে অভিষেক ঘটে বাংলাদেশ দলের।</p></div>"
+    },
+    {
+        "question": "<p>বাংলাদেশের সংবিধানের কোন অনুচ্ছেদে \"সকল শিশুর জন্য অবৈতনিক ও বাধ্যতামূলক প্রাথমিক শিক্ষা নিশ্চিত করা\" উল্লেখ করা হয়েছে-</p>",
+        "options": ["১৮ অনুচ্ছেদ", "১৯ অনুচ্ছেদ", "১৫ অনুচ্ছেদ", "১৭ অনুচ্ছেদ"],
+        "answer": 3,
+        "explanation": "<div class='explanation'><p>দ্বিতীয় ভাগ</p><p>রাষ্ট্র পরিচালনার মূলনীতি</p><p>অবৈতনিক ও বাধ্যতামূলক শিক্ষা<br>১৭৷ রাষ্ট্র<br><br>(ক) একই পদ্ধতির গণমুখী ও সার্বজনীন শিক্ষাব্যবস্থা প্রতিষ্ঠার জন্য এবং আইনের দ্বারা নির্ধারিত স্তর পর্যন্ত সকল বালক-বালিকাকে অবৈতনিক ও বাধ্যতামূলক শিক্ষাদানের জন্য;<br><br>(খ) সমাজের প্রয়োজনের সহিত শিক্ষাকে সঙ্গতিপূর্ণ করিবার জন্য এবং সেই প্রয়োজন সিদ্ধ করিবার উদ্দেশ্যে যথাযথ প্রশিক্ষণপ্রাপ্ত ও সদিচ্ছাপ্রণোদিত নাগরিক সৃষ্টির জন্য;<br><br>(গ) আইনের দ্বারা নির্ধারিত সময়ের মধ্যে নিরক্ষরতা দূর করিবার জন্য <br>কার্যকর ব্যবস্থা গ্রহণ করিবেন৷</p></div>"
+    },
+    {
+        "question": "<p>০, ১, ২, ৩ ও ৪ দ্বারা গঠিত ০৫ অঙ্কের বৃহত্তম ও ক্ষুদ্রতম সংখ্যা যোগ করলে যোগফল কত হবে?</p>",
+        "options": ["৫৩৪৪৪", "৫৩২৪৪", "৫৩৪৪২", "৫৩৪৪৬"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>জন্ম থেকে মৃত্যু পর্যন্ত মানুষ বাস্তব অভিজ্ঞতার মধ্য দিয়ে যে অভিজ্ঞতা অর্জন করে তা হলো-</p>",
+        "options": ["উপানুষ্ঠানিক শিক্ষা", "পারিবারিক শিক্ষা", "অনানুষ্ঠানিক শিক্ষা", "আনুষ্ঠানিক শিক্ষা"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Who, Which, What are-</p>",
+        "options": ["Reflexive pronoun", "Indefinite pronoun", "Demonstrative pronoun", "Relative pronoun"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>একটি বর্গাকার জমির দৈর্ঘ্য ২০% বাড়ালে এবং প্রস্থ ১০% কমালে ক্ষেত্রফল কতটুকু বৃদ্ধি/হ্রাস পাবে?</p>",
+        "options": ["<p>৫% বৃদ্ধি</p>", "<p>১০% বৃদ্ধি</p>", "<p>৮% বৃদ্ধি</p>", "<p>২% বৃদ্ধি</p>"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>কোন ভগ্নাংশটি ক্ষুদ্রতম?</p>",
+        "options": ["<math><mfrac><mrow><mi>১</mi><mi>১</mi></mrow><mrow><mi>১</mi><mi>৪</mi></mrow></mfrac></math>", "<math><mfrac><mrow><mi>১</mi><mi>৭</mi></mrow><mrow><mi>২</mi><mi>১</mi></mrow></mfrac></math>", "<math><mfrac><mi>৫</mi><mi>৬</mi></mfrac></math>", "<math><mfrac><mrow><mi>১</mi><mi>২</mi></mrow><mrow><mi>১</mi><mi>৫</mi></mrow></mfrac></math>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>'ব্রেটন উডস ইনস্টিটিউট' বলতে কোন সংস্থাকে বোঝায়?</p>",
+        "options": ["বিশ্বব্যাংক", "আইএমএফ", "এডিবি", "ক ও খ উভয়ই"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>লিঙ্গান্তর হয় না এমন শব্দ কোনটি?</p>",
+        "options": ["সাহেব", "বিয়াই", "সঙ্গী", "কবিরাজ"],
+        "answer": 3,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Find the appropriate meaning (synonym) of truce</p>",
+        "options": ["strong", "trifle", "ceasefire", "turbulent"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>Identify the imperative sentence-</p>",
+        "options": ["It has been raining since morning", "I shall go to college", "stand up", "Momin is singing a song"],
+        "answer": 2,
+        "explanation": ""
+    },
+    {
+        "question": "<p>বিজ্ঞান শব্দের যুক্ত বর্ণের সঠিক রূপ কোনটি?</p>",
+        "options": ["<p>জ্‌ + ঞ</p>", "<p>ঞ + গ</p>", "<p>ঞ্‌ + জ</p>", "<p>গ্‌ +ঞ</p>"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p>দুইটি সংখ্যার ল.সা.গু, ৩৬ এবং গ.সা.গু. ০৬ । একটি সংখ্যা ১২ হলে অপরটি কত?</p>",
+        "options": ["১৮", "৯", "১২", "১৫"],
+        "answer": 0,
+        "explanation": ""
+    },
+    {
+        "question": "<p><math><mfrac><mrow><mi>a</mi><mo>-</mo><mi>b</mi><mo>+</mo><mi>b</mi><mo>(</mo><mi>a</mi><mo>-</mo><mi>b</mi><mo>)</mo></mrow><mrow><mi>a</mi><mo>-</mo><mi>b</mi></mrow></mfrac></math> = ?</p>",
+        "options": ["1 + b", "<math><mfrac><mrow><mo>(</mo><mn>1</mn><mo>-</mo><mi>b</mi><mo>)</mo><mo>&nbsp;</mo><mo>(</mo><mi>a</mi><mo>-</mo><mi>b</mi><mo>)</mo></mrow><mrow><mi>a</mi><mo>-</mo><mi>b</mi></mrow></mfrac></math>", "<math><mfrac><mrow><mn>1</mn><mo>+</mo><mi>b</mi></mrow><mrow><mn>1</mn><mo>-</mo><mi>b</mi></mrow></mfrac></math>", "a + b"],
+        "answer": 0,
+        "explanation": ""
+    }
+];
+
+
+</script>
+
+<style>
+html, body {
+    width: 100vw; 
+    margin:0; 
+    overflow-x:hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 5vw;
+}
+
+#exam-details {
+    width: fit-content;
+    margin: 5vw auto; 
+}
+
+
+.tag-container{
+    width:fit-content;
+  margin: 5vw auto; 
+  
+}
+.flex-container{
+    
+}
+
+.tag-container p{
+  margin: 3vw;
+  right: 0vw;
+}
+
+.label {
+    display : inline-block;
+    width : 32vw;
+    text-align: right;
+    margin: 0 5px;
+}
+.tag-container select{
+    margin: auto; 
+  font-size: 4vw;
+}
+
+.filter-btn{
+    display : block;
+    width:fit-content;
+    margin: 10vw auto; 
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+
+
+
+.question-card{
+  margin: 3vw;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.unavailable{
+	color: red;
+}
+
+.question {
+  padding: 10px;
+}
+
+.options p{
+  display : inline;
+}
+
+.options label{
+  display : inline-block;
+  width:100%;
+}
+
+.correct {
+  background-color: #d4edda;
+}
+
+.incorrect {
+  background-color: #f8d7da;
+}
+
+.answer-label.correct-answer {
+  font-weight: bold;
+  color: green;
+}
+
+.answer-label.wrong-answer {
+  color: red;
+}
+
+.result {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.explanation-container button {
+    width:100%;
+  padding: 10px;
+}
+
+.explanation-container {
+    background-color: #fff;
+    margin: 2px;
+  /*
+  border: 1px solid #aaa;
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #f1f1f1;
+  border-left: 4px solid #aaa;
+  border-radius: 4px;*/
+}
+
+.explanation-text {
+  display: none;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10vw;
+  margin: auto;
+  margin-top: 10vw;
+}
+
+.category-btn {
+    width: 60vw;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.category-btn:hover {
+  background-color: #2980b9;
+}
+
+
+.home-btn-container {
+    width: min-content;
+  margin: 0 auto;
+}
+
+.home-btn {
+    margin-bottom: 10vw;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.home-btn:hover {
+  background-color: #27ae60;
+}
+
+
+#home-top,
+#home-bottom {
+  display: none;
+   
+}
+#quiz-controls {
+  display: none;
+  text-align: center;
+  margin: 20px;
+}
+
+#quiz-controls button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+#submit-button, retry-button{
+  display: none;
+}
+
+
+.lock-section {
+  text-align: right;
+  margin-top: 5px;
+}
+
+.lock-icon {
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+  color: #555;
+}
+
+.locked .lock-icon {
+  color: #2ecc71;
+}
+
+figure, img{
+    width: 100%;
+    margin: 0;
+}
+
+.explanation {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f0f8ff;
+  border-left: 4px solid #3498db;
+}
+
+</style>
+</head>
+<body>
+
+<div style="margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #74ebd5, #9face6); color: #333; text-align: center; border-radius: 4vw;">
+	<div id="image-holder" style="display: flex; ">
+		<img id="avater" style="display: inline-block;  margin: auto 7vw; height: 20vw; width:20vw; border-radius: 50%;" src="https://armanhossaindeveloper.github.io/ArmanHostPages/assets/images/avater.png"/>
+		<div   style="display: inline-block;">
+			<span >Developed by:</span> <br>
+			<span >Arman Hossain</span> <br>
+			<div class="exam-details"><br>
+				প্রাথমিক সহকারী<br>
+				শিক্ষক নিয়োগ পরীক্ষা<br>
+				Date: 09-01-2026</b>
+			</div>
+			
+		</div>
+	</div>
+</div>
+  
+  
+  
+<div id="exam-details">
+    
+</div>
+  
+  
+
+
+
+<!--div id="home-top" class="home-btn-container">
+  <-button onclick="goHome()" class="home-btn">Home</button->
+  <button type="button" class="home-btn" onclick="submitAll()">Learn with Solutions</button>
+  
+</div-->
+
+<div id="output"></div>
+
+
+
+<form id="quiz-form"></form>
+
+
+
+
+<div id="result" class="result"></div>
+
+  <div id="quiz-controls" class="quiz-controls">
+  <button id="submit-button" type="button" onclick="submitQuiz()">Submit</button>
+  <button id="retry-button" type="button" onclick="retryIncorrect()">Retry Incorrect</button>
+</div>
+
+<button onclick="filterMcqs()" class="filter-btn">Restart Test</button>
+
+<div id="home-bottom" class="home-btn-container">
+  <button onclick="goHome()" class="home-btn">Home</button>
+</div>
+
+
+
+
+
+  
+<script>
+
+
+categoryNames = [];
+
+isAnswersSubmitted = false;
+
+
+function print(text){
+  output.innerText += text;
+}
+
+function clearOptions(list){
+  list.innerHTML = "";
+}
+function createOptions(list, options, isAscending){
+    if(!options) {return};
+    options.forEach((text) => {
+        option = document.createElement("option");
+        option.text = text;
+        if(isAscending) list.appendChild(option);
+        else list.insertBefore(option, list.firstChild);
+    });
+}
+
+function filterMcqs(){
+    goHome();
+    onLoadJsonMCQ();
+  //TODO: eval jsonMCQ
+  
+  
+  
+  
+  //print(mcqs[0].question);
+  //print(JSON.stringify(mcqs[0]));
+  //print(mcqs.length);
+  
+}
+
+function onLoadJsonMCQ(){
+  //showExamDetails();
+  loadMCQs(mcqs);
+  //print(mcqs[0].question);
+  //print(JSON.stringify(mcqs[0]));
+  //print(mcqs.length);
+  
+}
+
+function showExamDetails(){
+    detailsDiv = document.querySelector("#exam-details");
+    detailsDiv.innerHTML = `
+        <p style="font-size:5vw;font-weight: normal;">
+        ${currentCategoryName}<br>
+        ${currentExamName}<br>
+        ${currentSubjectNames}<br>
+		Total Questions: ${mcqs.length}<br></p>
+    `;
+}
+
+
+function initOptions(){
+    //filterMcqs();
+    //options = ["Option 1", "Option 2", "Option 3"];
+    
+        
+  
+  //subjectNames = JSON.parse(Android.getSubjects());
+  //createOptions(subjectList, subjectNames);
+}
+
+let currentQuestions = [];
+let incorrectAnswers = {};
+negScore = -0.25;
+const form = document.getElementById('quiz-form');
+const resultDiv = document.getElementById('result');
+
+
+
+
+function loadMCQs(mcqs) {
+  currentQuestions = mcqs;
+  incorrectAnswers = {};
+  document.getElementById("result").textContent = '';
+  //document.getElementById("home-top").style.display = "block";
+  document.getElementById("home-bottom").style.display = "flex";
+  document.getElementById("quiz-controls").style.display = "block";
+  renderQuiz(currentQuestions);
+};
+
+
+function getOption(index, option, i) {
+  const inputId = `q${index}_opt${i}`;
+      return `
+        <label for="${inputId}" class="answer-label" id="label-${inputId}">
+          <input type="radio" name="q${index}" id="${inputId}" value="${i}">
+          ${option}
+        </label><br>
+      `;
+}
+function getOptions(index, options) {
+    optionBlock = "";
+    for(i = 0; i < options.length; i++){
+        optionBlock += getOption(index, options[i], i);
+    }
+    return optionBlock;
+}
+
+function isUnavailable(answer){
+	if(answer < 0) return "unavailable";
+}
+
+function renderQuiz(questions) {
+    isAnswersSubmitted = false;
+    form.innerHTML = '';
+    questions.forEach((q, index) => {
+        card = document.createElement('div');
+        card.innerHTML = `
+            <div class="question-card ${isUnavailable(q.answer)}"    >
+                <div class="question" data-locked="false" id="question-${index}">
+                    <p>${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${getOptions(index, q.options)}
+                    </div>
+                </div>
+                <div class="explanation-container">
+                    <button type="button" onclick="toggleExplanation(this, ${index})">▶ Reveal Answer</button>
+                    <div class="explanation-text" style="display:none; margin: 5px 0 0;">${q.explanation}</div>
+                </div>
+            </div>
+        `;
+        form.appendChild(card);
+    });
+  
+
+    document.getElementById("submit-button").style.display = "inline-block";
+    document.getElementById("retry-button").style.display = "none";
+}
+
+function clearOption(quesIndex, i) {
+    const label = document.getElementById(`label-q${quesIndex}_opt${i}`);
+    label.classList.remove('correct-answer', 'wrong-answer');
+}
+function clearOptions(quesIndex, len) {
+    for(i = 0; i < len; i++){
+        clearOption(quesIndex, i); 
+    }
+}
+
+function submitAll() {
+    let score = 0;
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let unansweredCount = 0;
+    incorrectAnswers = {};
+    isAnswersSubmitted = true;
+
+    currentQuestions.forEach((q, i) => {
+        selected = document.querySelector(`input[name="q${i}"]:checked`);
+        questionDiv = document.getElementById(`question-${i}`);
+        questionDiv.classList.remove('correct', 'incorrect');
+        clearOptions(i, q.options.length); 
+        
+        
+        if (!selected) {
+			unansweredCount++;
+			incorrectAnswers[i] = q;
+			if (q.answer >= 0) document.getElementById(`label-q${i}_opt${q.answer}`).classList.add('correct-answer');
+			return;
+        }
+		if (q.answer < 0) return;
+		
+        const selectedValue = parseInt(selected.value);
+        if (selectedValue === q.answer) {
+            score += 1;
+            correctCount++;
+            questionDiv.classList.add('correct');
+            document.getElementById(`label-q${i}_opt${selectedValue}`).classList.add('correct-answer');
+        }
+        else {
+            score += negScore;
+            incorrectCount++;
+            questionDiv.classList.add('incorrect');
+            document.getElementById(`label-q${i}_opt${selectedValue}`).classList.add('wrong-answer');
+            document.getElementById(`label-q${i}_opt${q.answer}`).classList.add('correct-answer');
+            incorrectAnswers[i] = q;
+        }
+        
+	});
+
+    score = Math.max(score, 0);
+    resultDiv.innerHTML = `
+        <p style="font-size:4vw;font-weight: normal;">${currentCategoryName}<br>
+        ${currentExamName}<br>
+        ${currentSubjectNames}<br></p>
+        Score: ${score.toFixed(2)} / ${currentQuestions.length}<br>
+        Correct: ${correctCount}<br>
+        Incorrect: ${incorrectCount}<br>
+        Answered: ${correctCount + incorrectCount}<br>
+        UnAnswered: ${unansweredCount}
+    `;
+
+    document.getElementById("submit-button").style.display = "none";
+    if (incorrectCount + unansweredCount > 0) document.getElementById("retry-button").style.display = "inline-block";
+};
+
+window.submitQuiz = function() {
+submitAll();
+//document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+document.getElementById("result").scrollIntoView();
+
+};
+
+window.retryIncorrect = function() {
+    goHome();
+  const newQuestions = Object.values(incorrectAnswers);
+  if (newQuestions.length === 0) {
+    currentQuestions = [...originalQuestions];
+    resultDiv.textContent = '';
+        renderQuiz(currentQuestions);
+    return;
+  }
+  currentQuestions = newQuestions;
+  resultDiv.textContent = '';
+  renderQuiz(currentQuestions);
+};
+
+function toggleExplanation(button, index) {
+    container = button.parentElement;
+    card = container.parentElement;
+    if(!lockedInAnswer(card, index)) return;
+    
+  text = container.querySelector(".explanation-text");
+  
+  if (text.style.display === 'block') {
+    text.style.display = 'none';
+    button.textContent = '▶ Show Explanation';
+  } else {
+    text.style.display = 'block';
+    button.textContent = '▼ Hide Explanation';
+  }
+}
+
+function lockedInAnswer(card, index) {
+    questionDiv = card.querySelector(".question");
+    selected = questionDiv.querySelector('input[type="radio"]:checked');
+    isLocked = questionDiv.dataset.locked === "true";
+
+    if (isAnswersSubmitted || isLocked) return true;
+	
+	if (!selected) {
+        Android.toast("LOCK-IN your answer first!");
+        return false;
+    }
+	
+	q = currentQuestions[index];
+	
+	if (q.answer < 0) {
+        Android.toast("Answer not available!");
+        return false;
+    }
+	
+    questionDiv.dataset.locked = "true";
+    questionDiv.classList.add("locked");
+    
+    questionDiv.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+    
+    chosen = parseInt(selected.value);
+    const isCorrect = chosen === q.answer;
+    
+    labels = questionDiv.querySelectorAll("label");
+    questionDiv.classList.add(isCorrect ? 'correct' : 'incorrect');
+    labels[chosen].classList.add(isCorrect ? 'correct-answer' : 'wrong-answer');
+    if(!isCorrect) labels[q.answer].classList.add('correct-answer');
+    
+    return true;
+}
+
+
+
+function goHome() {
+    document.querySelector("#exam-details").scrollIntoView();
+    /*
+  document.getElementById("quiz-form").innerHTML = "";
+  document.getElementById("result").textContent = "";
+  document.getElementById("category-buttons").style.display = "flex";
+  document.getElementById("home-top").style.display = "none";
+  document.getElementById("home-bottom").style.display = "none";
+  document.getElementById("quiz-controls").style.display = "none";
+  */
+}
+
+
+
+
+
+initOptions();
+onLoadJsonMCQ();
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
