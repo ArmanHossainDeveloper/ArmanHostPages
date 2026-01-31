@@ -567,9 +567,37 @@ body {
   font-size: 5vw;
 }
 
+#credit-banner {
+	display: flex;
+	margin: 0;
+	font-family: 'Segoe UI', sans-serif; 
+	background: linear-gradient(to right, #74ebd5, #9face6); 
+	color: #333; 
+	border-radius: 4vw;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.avater{
+	height: 20vw;
+	width:20vw;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.avater img{
+	width: 100%;
+	object-position: center; 
+	object-fit: cover;    
+}
+.credit{
+	
+}
+
+
 #exam-details {
+	display: flex;
     width: fit-content;
     margin: 5vw auto; 
+	align-item: center;
 }
 
 
@@ -783,30 +811,27 @@ figure, img{
 </head>
 <body>
 
-<div style="margin: 0; font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #74ebd5, #9face6); color: #333; text-align: center; border-radius: 4vw;">
-	<div id="image-holder" style="display: flex; ">
-		<img id="avater" style="display: inline-block;  margin: auto 7vw; height: 20vw; width:20vw; border-radius: 50%;" src="https://armanhossaindeveloper.github.io/ArmanHostPages/assets/images/avater.png"/>
-		<div   style="display: inline-block;">
-			<span >Developed by:</span> <br>
-			<span >Arman Hossain</span> <br>
-			<div class="exam-details"><br>
-				প্রাথমিক সহকারী<br>
-				শিক্ষক নিয়োগ পরীক্ষা<br>
-				Date: 09-01-2026</b>
+
+<div id="credit-banner">
+		
+			<div class="avater">
+				<img src="/storage/emulated/0/Pictures/1762270870758.jpg"/>
 			</div>
-			
+			<div class="credit">
+				<span >Developed by:</span> <br>
+				<span >Arman Hossain</span>
+			</div>
 		</div>
-	</div>
+	
 </div>
   
-  
-  
 <div id="exam-details">
+  
+
     
 </div>
   
   
-
 
 
 <!--div id="home-top" class="home-btn-container">
@@ -882,7 +907,7 @@ function filterMcqs(){
 }
 
 function onLoadJsonMCQ(){
-  //showExamDetails();
+  showExamDetails();
   loadMCQs(mcqs);
   //print(mcqs[0].question);
   //print(JSON.stringify(mcqs[0]));
@@ -1122,15 +1147,7 @@ function lockedInAnswer(card, index) {
 
 
 function goHome() {
-    document.querySelector("#exam-details").scrollIntoView();
-    /*
-  document.getElementById("quiz-form").innerHTML = "";
-  document.getElementById("result").textContent = "";
-  document.getElementById("category-buttons").style.display = "flex";
-  document.getElementById("home-top").style.display = "none";
-  document.getElementById("home-bottom").style.display = "none";
-  document.getElementById("quiz-controls").style.display = "none";
-  */
+    document.querySelector("#credit-banner").scrollIntoView();
 }
 
 
