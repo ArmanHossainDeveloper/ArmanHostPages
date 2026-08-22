@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baladiya Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <section class="hero">
+      <h1>Baladiya Quiz</h1>
+      
+      <div class="toolbar">
+        
+        <select id="count">
+          <option>10</option>
+          <option>20</option>
+          <option>30</option>
+          <option>40</option>
+          <option>60</option>
+          <option>80</option>
+          <option>100</option>
+          <option>120</option>
+          <option>150</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+        </select>
+        
+        <button class="primary" onclick="startQuiz()">কুইজ শুরু করুন</button>
+      </div>
+      
+      <div class="progress">
+        <div class="bar" id="bar"></div>
+      </div>
+      
+      <div class="meta">
+        <span id="progressText">প্রস্তুত</span>
+        <span id="timer"></span>
+      </div>
+    </section>
+
+    <section id="quiz" class="quiz hidden">
+      <div class="q" id="question"></div>
+      <div class="source" id="source"></div>
+      <div class="options" id="options"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      
+      <div class="nav">
+        <button onclick="prevQ()">← আগের</button>
+        <button class="primary" id="nextBtn" onclick="nextQ()">পরের প্রশ্ন →</button>
+      </div>
+    </section>
+
+    <section id="result" class="quiz hidden"></section>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
