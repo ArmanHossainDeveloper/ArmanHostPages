@@ -26,6 +26,33 @@ body {
   padding: 24px;
 }
 
+#credit-banner {
+	display: flex;
+	margin: 15px 15px 0 15px;
+	font-family: 'Segoe UI', sans-serif; 
+	background: linear-gradient(to right, #74ebd5, #9face6); 
+	color: #333; 
+	border-radius: 4vw;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.avater{
+	height: 20vw;
+	width:20vw;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.avater img{
+	width: 100%;
+	object-position: center; 
+	object-fit: cover;    
+}
+
+figure, img{
+    width: 100%;
+    margin: 0;
+}
+
 .hero,
 .quiz {
   background: var(--card);
